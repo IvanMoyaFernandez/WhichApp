@@ -1,0 +1,10 @@
+{
+    "whichApp": {
+        "EnumOS" : {
+            "null": "",
+            "Android": "Android",
+            "iOS": "iOS",
+            "Windows": "Windows"
+        }
+    }
+}

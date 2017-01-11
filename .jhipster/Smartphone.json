@@ -1,0 +1,84 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "modelo",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "marca",
+            "fieldType": "EnumMarca",
+            "fieldValues": "Samsung, Apple, Nokia",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "camara",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "frontCamara",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "bateria",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "pulgadasPantalla",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "resolucionPantalla",
+            "fieldType": "EnumResolucionPantalla",
+            "fieldValues": "CuatroK",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "ram",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "so",
+            "fieldType": "EnumOS",
+            "fieldValues": "Android, iOS, Windows",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "rom",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20170111214335",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "smartphone",
+    "pagination": "no"
+}

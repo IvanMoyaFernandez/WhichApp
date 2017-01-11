@@ -1,0 +1,31 @@
+{
+    "whichApp": {
+        "smartphone" : {
+            "home": {
+                "title": "Smartphones",
+                "createLabel": "Crear nuevo Smartphone",
+                "createOrEditLabel": "Crear o editar Smartphone",
+                "search": "Search for Smartphone"
+            },
+            "created": "Un nuevo Smartphone ha sido creado con el identificador {{ param }}",
+            "updated": "Un Smartphone ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Smartphone ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Smartphone {{ id }}?"
+            },
+            "detail": {
+                "title": "Smartphone"
+            },
+            "modelo": "Modelo",
+            "marca": "Marca",
+            "camara": "Camara",
+            "frontCamara": "Front Camara",
+            "bateria": "Bateria",
+            "pulgadasPantalla": "Pulgadas Pantalla",
+            "resolucionPantalla": "Resolucion Pantalla",
+            "ram": "Ram",
+            "so": "So",
+            "rom": "Rom"
+        }
+    }
+}

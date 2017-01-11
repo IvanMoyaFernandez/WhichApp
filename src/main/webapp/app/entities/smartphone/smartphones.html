@@ -1,0 +1,74 @@
+<div>
+    <h2 data-translate="whichApp.smartphone.home.title">Smartphones</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="smartphone.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="whichApp.smartphone.home.createLabel">
+                        Create new Smartphone
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span data-translate="global.field.id">ID</span></th>
+                    <th><span data-translate="whichApp.smartphone.modelo">Modelo</span></th>
+                    <th><span data-translate="whichApp.smartphone.marca">Marca</span></th>
+                    <th><span data-translate="whichApp.smartphone.camara">Camara</span></th>
+                    <th><span data-translate="whichApp.smartphone.frontCamara">Front Camara</span></th>
+                    <th><span data-translate="whichApp.smartphone.bateria">Bateria</span></th>
+                    <th><span data-translate="whichApp.smartphone.pulgadasPantalla">Pulgadas Pantalla</span></th>
+                    <th><span data-translate="whichApp.smartphone.resolucionPantalla">Resolucion Pantalla</span></th>
+                    <th><span data-translate="whichApp.smartphone.ram">Ram</span></th>
+                    <th><span data-translate="whichApp.smartphone.so">So</span></th>
+                    <th><span data-translate="whichApp.smartphone.rom">Rom</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="smartphone in vm.smartphones track by smartphone.id">
+                    <td><a ui-sref="smartphone-detail({id:smartphone.id})">{{smartphone.id}}</a></td>
+                    <td>{{smartphone.modelo}}</td>
+                    <td data-translate="{{'whichApp.EnumMarca.' + smartphone.marca}}">{{smartphone.marca}}</td>
+                    <td>{{smartphone.camara}}</td>
+                    <td>{{smartphone.frontCamara}}</td>
+                    <td>{{smartphone.bateria}}</td>
+                    <td>{{smartphone.pulgadasPantalla}}</td>
+                    <td data-translate="{{'whichApp.EnumResolucionPantalla.' + smartphone.resolucionPantalla}}">{{smartphone.resolucionPantalla}}</td>
+                    <td>{{smartphone.ram}}</td>
+                    <td data-translate="{{'whichApp.EnumOS.' + smartphone.so}}">{{smartphone.so}}</td>
+                    <td>{{smartphone.rom}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="smartphone-detail({id:smartphone.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="smartphone.edit({id:smartphone.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="smartphone.delete({id:smartphone.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

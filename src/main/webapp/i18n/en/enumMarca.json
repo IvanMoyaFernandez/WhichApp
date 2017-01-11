@@ -1,0 +1,10 @@
+{
+    "whichApp": {
+        "EnumMarca" : {
+            "null": "",
+            "Samsung": "Samsung",
+            "Apple": "Apple",
+            "Nokia": "Nokia"
+        }
+    }
+}
