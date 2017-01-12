@@ -28,10 +28,11 @@
         <div class="form-group">
             <label class="control-label" data-translate="whichApp.smartphone.marca" for="field_marca">Marca</label>
             <select class="form-control" name="marca" ng-model="vm.smartphone.marca" id="field_marca" required>
-                <option value="Samsung" data-translate="Samsung">Samsung</option>
-                <option value="Apple" data-translate="Apple">Apple</option>
-                <option value="Nokia" data-translate="Nokia">Nokia</option>
-                <option value="Huawai" data-translate="Huawai">Huawai</option>
+                <option value="Samsung" data-translate="whichApp.EnumMarca.Samsung">Samsung</option>
+                <option value="Apple" data-translate="whichApp.EnumMarca.Apple">Apple</option>
+                <option value="Nokia" data-translate="whichApp.EnumMarca.Nokia">Nokia</option>
+                <option value="Huawai" data-translate="whichApp.EnumMarca.Huawai">Huawai</option>
+                <option value="BlackBerry" data-translate="whichApp.EnumMarca.BlackBerry">BlackBerry</option>
             </select>
             <div ng-show="editForm.marca.$invalid">
                 <p class="help-block"
@@ -108,11 +109,11 @@
             <label class="control-label" data-translate="whichApp.smartphone.resolucionPantalla" for="field_resolucionPantalla">Resolucion Pantalla</label>
             <select class="form-control" name="resolucionPantalla" ng-model="vm.smartphone.resolucionPantalla" id="field_resolucionPantalla" required>
                 <option value="CuatroK" data-translate="whichApp.EnumResolucionPantalla.CuatroK">4K</option>
-                <option value="Mil440p" data-translate="1440p">1440p</option>
-                <option value="FullHD" data-translate="FullHD">FullHD</option>
-                <option value="HD" data-translate="HD">HD</option>
-                <option value="XGA" data-translate="XGA">XGA</option>
-                <option value="VGA" data-translate="VGA">VGA</option>
+                <option value="Mil_440p" data-translate="whichApp.EnumResolucionPantalla.Mil_440p">1440p</option>
+                <option value="FullHD" data-translate="whichApp.EnumResolucionPantalla.FullHD">FullHD</option>
+                <option value="HD" data-translate="whichApp.EnumResolucionPantalla.HD">HD</option>
+                <option value="XGA" data-translate="whichApp.EnumResolucionPantalla.XGA">XGA</option>
+                <option value="VGA" data-translate="whichApp.EnumResolucionPantalla.VGA">VGA</option>
             </select>
             <div ng-show="editForm.resolucionPantalla.$invalid">
                 <p class="help-block"
@@ -143,7 +144,7 @@
                 <option value="Android" data-translate="whichApp.EnumOS.Android">Android</option>
                 <option value="iOS" data-translate="whichApp.EnumOS.iOS">iOS</option>
                 <option value="Windows" data-translate="whichApp.EnumOS.Windows">Windows</option>
-                <option value="BlackberryOS" data-translate="BlackBerryOS">BlackberryOS</option>
+                <option value="BlackBerryOS" data-translate="whichApp.EnumOS.BlackBerryOS">BlackBerryOS</option>
             </select>
             <div ng-show="editForm.so.$invalid">
                 <p class="help-block"

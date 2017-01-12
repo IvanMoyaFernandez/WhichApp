@@ -60,7 +60,7 @@ public class SmartphoneResourceIntTest {
     private static final Double UPDATED_PULGADAS_PANTALLA = 2D;
 
     private static final EnumResolucionPantalla DEFAULT_RESOLUCION_PANTALLA = EnumResolucionPantalla.CuatroK;
-    private static final EnumResolucionPantalla UPDATED_RESOLUCION_PANTALLA = EnumResolucionPantalla.CuatroK;
+    private static final EnumResolucionPantalla UPDATED_RESOLUCION_PANTALLA = EnumResolucionPantalla.Mil_440p;
 
     private static final Integer DEFAULT_RAM = 1;
     private static final Integer UPDATED_RAM = 2;

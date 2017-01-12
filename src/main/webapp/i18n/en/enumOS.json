@@ -4,7 +4,8 @@
             "null": "",
             "Android": "Android",
             "iOS": "iOS",
-            "Windows": "Windows"
+            "Windows": "Windows",
+            "BlackBerryOS": "BlackBerryOS"
         }
     }
 }

@@ -2,7 +2,12 @@
     "whichApp": {
         "EnumResolucionPantalla" : {
             "null": "",
-            "CuatroK": "CuatroK"
+            "CuatroK": "CuatroK",
+            "Mil_440p": "Mil_440p",
+            "FullHD": "FullHD",
+            "HD": "HD",
+            "XGA": "XGA",
+            "VGA": "VGA"
         }
     }
 }

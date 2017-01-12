@@ -4,7 +4,9 @@
             "null": "",
             "Samsung": "Samsung",
             "Apple": "Apple",
-            "Nokia": "Nokia"
+            "Nokia": "Nokia",
+            "Huawai": "Huawai",
+            "BlackBerry": "BlackBerry"
         }
     }
 }

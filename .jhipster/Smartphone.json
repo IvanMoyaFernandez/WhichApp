@@ -12,7 +12,7 @@
         {
             "fieldName": "marca",
             "fieldType": "EnumMarca",
-            "fieldValues": "Samsung, Apple, Nokia",
+            "fieldValues": "Samsung, Apple, Nokia, Huawai, BlackBerry",
             "fieldValidateRules": [
                 "required"
             ]
@@ -48,7 +48,7 @@
         {
             "fieldName": "resolucionPantalla",
             "fieldType": "EnumResolucionPantalla",
-            "fieldValues": "CuatroK",
+            "fieldValues": "CuatroK, Mil_440p, FullHD, HD, XGA, VGA",
             "fieldValidateRules": [
                 "required"
             ]
@@ -63,7 +63,7 @@
         {
             "fieldName": "so",
             "fieldType": "EnumOS",
-            "fieldValues": "Android, iOS, Windows",
+            "fieldValues": "Android, iOS, Windows, BlackBerryOS",
             "fieldValidateRules": [
                 "required"
             ]

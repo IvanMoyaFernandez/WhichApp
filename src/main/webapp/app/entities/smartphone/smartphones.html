@@ -36,14 +36,14 @@
                 <tr ng-repeat="smartphone in vm.smartphones track by smartphone.id">
                     <td><a ui-sref="smartphone-detail({id:smartphone.id})">{{smartphone.id}}</a></td>
                     <td>{{smartphone.modelo}}</td>
-                    <td data-translate="{{smartphone.marca}}">{{smartphone.marca}}</td>
+                    <td data-translate="{{'whichApp.EnumMarca.' + smartphone.marca}}">{{smartphone.marca}}</td>
                     <td>{{smartphone.camara}}</td>
                     <td>{{smartphone.frontCamara}}</td>
                     <td>{{smartphone.bateria}}</td>
                     <td>{{smartphone.pulgadasPantalla}}</td>
-                    <td data-translate="{{smartphone.resolucionPantalla}}">{{smartphone.resolucionPantalla}}</td>
+                    <td data-translate="{{'whichApp.EnumResolucionPantalla.' + smartphone.resolucionPantalla}}">{{smartphone.resolucionPantalla}}</td>
                     <td>{{smartphone.ram}}</td>
-                    <td data-translate="{{smartphone.so}}">{{smartphone.so}}</td>
+                    <td data-translate="{{'whichApp.EnumOS.' + smartphone.so}}">{{smartphone.so}}</td>
                     <td>{{smartphone.rom}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
