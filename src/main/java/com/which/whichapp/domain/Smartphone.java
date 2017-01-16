@@ -10,6 +10,9 @@ import com.which.whichapp.domain.enumeration.EnumMarca;
 
 import com.which.whichapp.domain.enumeration.EnumOS;
 
+/**
+ * A Smartphone.
+ */
 @Entity
 @Table(name = "smartphone")
 public class Smartphone implements Serializable {

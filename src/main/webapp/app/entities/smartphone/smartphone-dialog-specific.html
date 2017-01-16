@@ -1,0 +1,71 @@
+<div>
+    <h2><span data-translate="whichApp.smartphone.detail.title">Smartphone</span> {{vm.smartphone.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        marcaaaa
+        <dt><span data-translate="whichApp.smartphone.marca">Marca</span></dt>
+        <dd>
+            <span data-translate="{{'whichApp.EnumMarca.' + vm.smartphone.marca}}">{{vm.smartphone.marca}}</span>
+        </dd>
+        <dt><span data-translate="whichApp.smartphone.modelo">Modelo</span></dt>
+        <dd>
+            <span>{{vm.smartphone.modelo}}</span>
+        </dd>
+        <dt><span data-translate="whichApp.smartphone.camara">Camara</span></dt>
+        <dd>
+            <span>{{vm.smartphone.camara}}</span>
+        </dd>
+        <dt><span data-translate="whichApp.smartphone.frontCamara">Front Camara</span></dt>
+        <dd>
+            <span>{{vm.smartphone.frontCamara}}</span>
+        </dd>
+        <dt><span data-translate="whichApp.smartphone.bateria">Bateria</span></dt>
+        <dd>
+            <span>{{vm.smartphone.bateria}}</span>
+        </dd>
+        <dt><span data-translate="whichApp.smartphone.pulgadasPantalla">Pulgadas Pantalla</span></dt>
+        <dd>
+            <span>{{vm.smartphone.pulgadasPantalla}}</span>
+        </dd>
+        <dt><span data-translate="whichApp.smartphone.resolucionPantallaAlto">Resolucion Pantalla Alto</span></dt>
+        <dd>
+            <span>{{vm.smartphone.resolucionPantallaAlto}}</span>
+        </dd>
+        <dt><span data-translate="whichApp.smartphone.resolucionPantallaAncho">Resolucion Pantalla Ancho</span></dt>
+        <dd>
+            <span>{{vm.smartphone.resolucionPantallaAncho}}</span>
+        </dd>
+        <dt><span data-translate="whichApp.smartphone.ram">Ram</span></dt>
+        <dd>
+            <span>{{vm.smartphone.ram}}</span>
+        </dd>
+        <dt><span data-translate="whichApp.smartphone.so">So</span></dt>
+        <dd>
+            <span data-translate="{{'whichApp.EnumOS.' + vm.smartphone.so}}">{{vm.smartphone.so}}</span>
+        </dd>
+        <dt><span data-translate="whichApp.smartphone.rom">Rom</span></dt>
+        <dd>
+            <span>{{vm.smartphone.rom}}</span>
+        </dd>
+        <dt><span data-translate="whichApp.smartphone.proteccionPolvo">Proteccion Polvo</span></dt>
+        <dd>
+            <span>{{vm.smartphone.proteccionPolvo}}</span>
+        </dd>
+        <dt><span data-translate="whichApp.smartphone.proteccionLiquido">Proteccion Liquido</span></dt>
+        <dd>
+            <span>{{vm.smartphone.proteccionLiquido}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="smartphone-detail.edit({id:vm.smartphone.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
