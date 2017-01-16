@@ -24,19 +24,19 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="modelo" type="varchar(255)">
-                <constraints nullable="false" />
-            </column>
-            
             <column name="marca" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
             
-            <column name="camara" type="double">
+            <column name="modelo" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
             
-            <column name="front_camara" type="double">
+            <column name="camara" type="integer">
+                <constraints nullable="false" />
+            </column>
+            
+            <column name="front_camara" type="integer">
                 <constraints nullable="false" />
             </column>
             
@@ -48,11 +48,15 @@
                 <constraints nullable="false" />
             </column>
             
-            <column name="resolucion_pantalla" type="varchar(255)">
+            <column name="resolucion_pantalla_alto" type="integer">
                 <constraints nullable="false" />
             </column>
             
-            <column name="ram" type="integer">
+            <column name="resolucion_pantalla_ancho" type="integer">
+                <constraints nullable="false" />
+            </column>
+            
+            <column name="ram" type="double">
                 <constraints nullable="false" />
             </column>
             
@@ -61,6 +65,14 @@
             </column>
             
             <column name="rom" type="integer">
+                <constraints nullable="false" />
+            </column>
+            
+            <column name="proteccion_polvo" type="integer">
+                <constraints nullable="false" />
+            </column>
+            
+            <column name="proteccion_liquido" type="integer">
                 <constraints nullable="false" />
             </column>
             

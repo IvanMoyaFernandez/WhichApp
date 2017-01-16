@@ -19,32 +19,38 @@
             <thead>
                 <tr>
                     <th><span data-translate="global.field.id">ID</span></th>
-                    <th><span data-translate="whichApp.smartphone.modelo">Modelo</span></th>
                     <th><span data-translate="whichApp.smartphone.marca">Marca</span></th>
+                    <th><span data-translate="whichApp.smartphone.modelo">Modelo</span></th>
                     <th><span data-translate="whichApp.smartphone.camara">Camara</span></th>
                     <th><span data-translate="whichApp.smartphone.frontCamara">Front Camara</span></th>
                     <th><span data-translate="whichApp.smartphone.bateria">Bateria</span></th>
                     <th><span data-translate="whichApp.smartphone.pulgadasPantalla">Pulgadas Pantalla</span></th>
-                    <th><span data-translate="whichApp.smartphone.resolucionPantalla">Resolucion Pantalla</span></th>
+                    <th><span data-translate="whichApp.smartphone.resolucionPantallaAlto">Resolucion Pantalla Alto</span></th>
+                    <th><span data-translate="whichApp.smartphone.resolucionPantallaAncho">Resolucion Pantalla Ancho</span></th>
                     <th><span data-translate="whichApp.smartphone.ram">Ram</span></th>
                     <th><span data-translate="whichApp.smartphone.so">So</span></th>
                     <th><span data-translate="whichApp.smartphone.rom">Rom</span></th>
+                    <th><span data-translate="whichApp.smartphone.proteccionPolvo">Proteccion Polvo</span></th>
+                    <th><span data-translate="whichApp.smartphone.proteccionLiquido">Proteccion Liquido</span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="smartphone in vm.smartphones track by smartphone.id">
                     <td><a ui-sref="smartphone-detail({id:smartphone.id})">{{smartphone.id}}</a></td>
-                    <td>{{smartphone.modelo}}</td>
                     <td data-translate="{{'whichApp.EnumMarca.' + smartphone.marca}}">{{smartphone.marca}}</td>
+                    <td>{{smartphone.modelo}}</td>
                     <td>{{smartphone.camara}}</td>
                     <td>{{smartphone.frontCamara}}</td>
                     <td>{{smartphone.bateria}}</td>
                     <td>{{smartphone.pulgadasPantalla}}</td>
-                    <td data-translate="{{'whichApp.EnumResolucionPantalla.' + smartphone.resolucionPantalla}}">{{smartphone.resolucionPantalla}}</td>
+                    <td>{{smartphone.resolucionPantallaAlto}}</td>
+                    <td>{{smartphone.resolucionPantallaAncho}}</td>
                     <td>{{smartphone.ram}}</td>
                     <td data-translate="{{'whichApp.EnumOS.' + smartphone.so}}">{{smartphone.so}}</td>
                     <td>{{smartphone.rom}}</td>
+                    <td>{{smartphone.proteccionPolvo}}</td>
+                    <td>{{smartphone.proteccionLiquido}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

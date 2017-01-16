@@ -14,18 +14,6 @@
                     ng-model="vm.smartphone.id" readonly />
         </div>
         <div class="form-group">
-            <label class="control-label" data-translate="whichApp.smartphone.modelo" for="field_modelo">Modelo</label>
-            <input type="text" class="form-control" name="modelo" id="field_modelo"
-                    ng-model="vm.smartphone.modelo"
-                    required />
-            <div ng-show="editForm.modelo.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.modelo.$error.required" data-translate="entity.validation.required">
-                    This field is required.
-                </p>
-            </div>
-        </div>
-        <div class="form-group">
             <label class="control-label" data-translate="whichApp.smartphone.marca" for="field_marca">Marca</label>
             <select class="form-control" name="marca" ng-model="vm.smartphone.marca" id="field_marca" required>
                 <option value="Samsung" data-translate="whichApp.EnumMarca.Samsung">Samsung</option>
@@ -37,6 +25,18 @@
             <div ng-show="editForm.marca.$invalid">
                 <p class="help-block"
                     ng-show="editForm.marca.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="whichApp.smartphone.modelo" for="field_modelo">Modelo</label>
+            <input type="text" class="form-control" name="modelo" id="field_modelo"
+                    ng-model="vm.smartphone.modelo"
+                    required />
+            <div ng-show="editForm.modelo.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.modelo.$error.required" data-translate="entity.validation.required">
                     This field is required.
                 </p>
             </div>
@@ -106,19 +106,34 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label" data-translate="whichApp.smartphone.resolucionPantalla" for="field_resolucionPantalla">Resolucion Pantalla</label>
-            <select class="form-control" name="resolucionPantalla" ng-model="vm.smartphone.resolucionPantalla" id="field_resolucionPantalla" required>
-                <option value="CuatroK" data-translate="whichApp.EnumResolucionPantalla.CuatroK">4K</option>
-                <option value="Mil_440p" data-translate="whichApp.EnumResolucionPantalla.Mil_440p">1440p</option>
-                <option value="FullHD" data-translate="whichApp.EnumResolucionPantalla.FullHD">FullHD</option>
-                <option value="HD" data-translate="whichApp.EnumResolucionPantalla.HD">HD</option>
-                <option value="XGA" data-translate="whichApp.EnumResolucionPantalla.XGA">XGA</option>
-                <option value="VGA" data-translate="whichApp.EnumResolucionPantalla.VGA">VGA</option>
-            </select>
-            <div ng-show="editForm.resolucionPantalla.$invalid">
+            <label class="control-label" data-translate="whichApp.smartphone.resolucionPantallaAlto" for="field_resolucionPantallaAlto">Resolucion Pantalla Alto</label>
+            <input type="number" class="form-control" name="resolucionPantallaAlto" id="field_resolucionPantallaAlto"
+                    ng-model="vm.smartphone.resolucionPantallaAlto"
+                    required />
+            <div ng-show="editForm.resolucionPantallaAlto.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.resolucionPantalla.$error.required" data-translate="entity.validation.required">
+                    ng-show="editForm.resolucionPantallaAlto.$error.required" data-translate="entity.validation.required">
                     This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.resolucionPantallaAlto.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="whichApp.smartphone.resolucionPantallaAncho" for="field_resolucionPantallaAncho">Resolucion Pantalla Ancho</label>
+            <input type="number" class="form-control" name="resolucionPantallaAncho" id="field_resolucionPantallaAncho"
+                    ng-model="vm.smartphone.resolucionPantallaAncho"
+                    required />
+            <div ng-show="editForm.resolucionPantallaAncho.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.resolucionPantallaAncho.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.resolucionPantallaAncho.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
                 </p>
             </div>
         </div>
@@ -165,6 +180,38 @@
                 </p>
                 <p class="help-block"
                     ng-show="editForm.rom.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="whichApp.smartphone.proteccionPolvo" for="field_proteccionPolvo">Proteccion Polvo</label>
+            <input type="number" class="form-control" name="proteccionPolvo" id="field_proteccionPolvo"
+                    ng-model="vm.smartphone.proteccionPolvo"
+                    required min="0" max="6"/>
+            <div ng-show="editForm.proteccionPolvo.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.proteccionPolvo.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.proteccionPolvo.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="whichApp.smartphone.proteccionLiquido" for="field_proteccionLiquido">Proteccion Liquido</label>
+            <input type="number" class="form-control" name="proteccionLiquido" id="field_proteccionLiquido"
+                    ng-model="vm.smartphone.proteccionLiquido"
+                    required min="0" max="9"/>
+            <div ng-show="editForm.proteccionLiquido.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.proteccionLiquido.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.proteccionLiquido.$error.number" data-translate="entity.validation.number">
                     This field should be a number.
                 </p>
             </div>

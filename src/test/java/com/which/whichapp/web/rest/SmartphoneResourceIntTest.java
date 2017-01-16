@@ -30,7 +30,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.which.whichapp.domain.enumeration.EnumMarca;
-import com.which.whichapp.domain.enumeration.EnumResolucionPantalla;
 import com.which.whichapp.domain.enumeration.EnumOS;
 /**
  * Test class for the SmartphoneResource REST controller.
@@ -41,17 +40,17 @@ import com.which.whichapp.domain.enumeration.EnumOS;
 @SpringBootTest(classes = WhichApp.class)
 public class SmartphoneResourceIntTest {
 
-    private static final String DEFAULT_MODELO = "AAAAAAAAAA";
-    private static final String UPDATED_MODELO = "BBBBBBBBBB";
-
     private static final EnumMarca DEFAULT_MARCA = EnumMarca.Samsung;
     private static final EnumMarca UPDATED_MARCA = EnumMarca.Apple;
 
-    private static final Double DEFAULT_CAMARA = 1D;
-    private static final Double UPDATED_CAMARA = 2D;
+    private static final String DEFAULT_MODELO = "AAAAAAAAAA";
+    private static final String UPDATED_MODELO = "BBBBBBBBBB";
 
-    private static final Double DEFAULT_FRONT_CAMARA = 1D;
-    private static final Double UPDATED_FRONT_CAMARA = 2D;
+    private static final Integer DEFAULT_CAMARA = 1;
+    private static final Integer UPDATED_CAMARA = 2;
+
+    private static final Integer DEFAULT_FRONT_CAMARA = 1;
+    private static final Integer UPDATED_FRONT_CAMARA = 2;
 
     private static final Integer DEFAULT_BATERIA = 1;
     private static final Integer UPDATED_BATERIA = 2;
@@ -59,17 +58,26 @@ public class SmartphoneResourceIntTest {
     private static final Double DEFAULT_PULGADAS_PANTALLA = 1D;
     private static final Double UPDATED_PULGADAS_PANTALLA = 2D;
 
-    private static final EnumResolucionPantalla DEFAULT_RESOLUCION_PANTALLA = EnumResolucionPantalla.CuatroK;
-    private static final EnumResolucionPantalla UPDATED_RESOLUCION_PANTALLA = EnumResolucionPantalla.Mil_440p;
+    private static final Integer DEFAULT_RESOLUCION_PANTALLA_ALTO = 1;
+    private static final Integer UPDATED_RESOLUCION_PANTALLA_ALTO = 2;
 
-    private static final Integer DEFAULT_RAM = 1;
-    private static final Integer UPDATED_RAM = 2;
+    private static final Integer DEFAULT_RESOLUCION_PANTALLA_ANCHO = 1;
+    private static final Integer UPDATED_RESOLUCION_PANTALLA_ANCHO = 2;
+
+    private static final Double DEFAULT_RAM = 1D;
+    private static final Double UPDATED_RAM = 2D;
 
     private static final EnumOS DEFAULT_SO = EnumOS.Android;
     private static final EnumOS UPDATED_SO = EnumOS.iOS;
 
     private static final Integer DEFAULT_ROM = 1;
     private static final Integer UPDATED_ROM = 2;
+
+    private static final Integer DEFAULT_PROTECCION_POLVO = 1;
+    private static final Integer UPDATED_PROTECCION_POLVO = 2;
+
+    private static final Integer DEFAULT_PROTECCION_LIQUIDO = 1;
+    private static final Integer UPDATED_PROTECCION_LIQUIDO = 2;
 
     @Inject
     private SmartphoneRepository smartphoneRepository;
@@ -108,16 +116,19 @@ public class SmartphoneResourceIntTest {
      */
     public static Smartphone createEntity(EntityManager em) {
         Smartphone smartphone = new Smartphone()
-                .modelo(DEFAULT_MODELO)
                 .marca(DEFAULT_MARCA)
+                .modelo(DEFAULT_MODELO)
                 .camara(DEFAULT_CAMARA)
                 .frontCamara(DEFAULT_FRONT_CAMARA)
                 .bateria(DEFAULT_BATERIA)
                 .pulgadasPantalla(DEFAULT_PULGADAS_PANTALLA)
-                .resolucionPantalla(DEFAULT_RESOLUCION_PANTALLA)
+                .resolucionPantallaAlto(DEFAULT_RESOLUCION_PANTALLA_ALTO)
+                .resolucionPantallaAncho(DEFAULT_RESOLUCION_PANTALLA_ANCHO)
                 .ram(DEFAULT_RAM)
                 .so(DEFAULT_SO)
-                .rom(DEFAULT_ROM);
+                .rom(DEFAULT_ROM)
+                .proteccionPolvo(DEFAULT_PROTECCION_POLVO)
+                .proteccionLiquido(DEFAULT_PROTECCION_LIQUIDO);
         return smartphone;
     }
 
@@ -142,16 +153,19 @@ public class SmartphoneResourceIntTest {
         List<Smartphone> smartphoneList = smartphoneRepository.findAll();
         assertThat(smartphoneList).hasSize(databaseSizeBeforeCreate + 1);
         Smartphone testSmartphone = smartphoneList.get(smartphoneList.size() - 1);
-        assertThat(testSmartphone.getModelo()).isEqualTo(DEFAULT_MODELO);
         assertThat(testSmartphone.getMarca()).isEqualTo(DEFAULT_MARCA);
+        assertThat(testSmartphone.getModelo()).isEqualTo(DEFAULT_MODELO);
         assertThat(testSmartphone.getCamara()).isEqualTo(DEFAULT_CAMARA);
         assertThat(testSmartphone.getFrontCamara()).isEqualTo(DEFAULT_FRONT_CAMARA);
         assertThat(testSmartphone.getBateria()).isEqualTo(DEFAULT_BATERIA);
         assertThat(testSmartphone.getPulgadasPantalla()).isEqualTo(DEFAULT_PULGADAS_PANTALLA);
-        assertThat(testSmartphone.getResolucionPantalla()).isEqualTo(DEFAULT_RESOLUCION_PANTALLA);
+        assertThat(testSmartphone.getResolucionPantallaAlto()).isEqualTo(DEFAULT_RESOLUCION_PANTALLA_ALTO);
+        assertThat(testSmartphone.getResolucionPantallaAncho()).isEqualTo(DEFAULT_RESOLUCION_PANTALLA_ANCHO);
         assertThat(testSmartphone.getRam()).isEqualTo(DEFAULT_RAM);
         assertThat(testSmartphone.getSo()).isEqualTo(DEFAULT_SO);
         assertThat(testSmartphone.getRom()).isEqualTo(DEFAULT_ROM);
+        assertThat(testSmartphone.getProteccionPolvo()).isEqualTo(DEFAULT_PROTECCION_POLVO);
+        assertThat(testSmartphone.getProteccionLiquido()).isEqualTo(DEFAULT_PROTECCION_LIQUIDO);
     }
 
     @Test
@@ -176,10 +190,10 @@ public class SmartphoneResourceIntTest {
 
     @Test
     @Transactional
-    public void checkModeloIsRequired() throws Exception {
+    public void checkMarcaIsRequired() throws Exception {
         int databaseSizeBeforeTest = smartphoneRepository.findAll().size();
         // set the field null
-        smartphone.setModelo(null);
+        smartphone.setMarca(null);
 
         // Create the Smartphone, which fails.
 
@@ -194,10 +208,10 @@ public class SmartphoneResourceIntTest {
 
     @Test
     @Transactional
-    public void checkMarcaIsRequired() throws Exception {
+    public void checkModeloIsRequired() throws Exception {
         int databaseSizeBeforeTest = smartphoneRepository.findAll().size();
         // set the field null
-        smartphone.setMarca(null);
+        smartphone.setModelo(null);
 
         // Create the Smartphone, which fails.
 
@@ -284,10 +298,28 @@ public class SmartphoneResourceIntTest {
 
     @Test
     @Transactional
-    public void checkResolucionPantallaIsRequired() throws Exception {
+    public void checkResolucionPantallaAltoIsRequired() throws Exception {
         int databaseSizeBeforeTest = smartphoneRepository.findAll().size();
         // set the field null
-        smartphone.setResolucionPantalla(null);
+        smartphone.setResolucionPantallaAlto(null);
+
+        // Create the Smartphone, which fails.
+
+        restSmartphoneMockMvc.perform(post("/api/smartphones")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(smartphone)))
+            .andExpect(status().isBadRequest());
+
+        List<Smartphone> smartphoneList = smartphoneRepository.findAll();
+        assertThat(smartphoneList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkResolucionPantallaAnchoIsRequired() throws Exception {
+        int databaseSizeBeforeTest = smartphoneRepository.findAll().size();
+        // set the field null
+        smartphone.setResolucionPantallaAncho(null);
 
         // Create the Smartphone, which fails.
 
@@ -356,6 +388,42 @@ public class SmartphoneResourceIntTest {
 
     @Test
     @Transactional
+    public void checkProteccionPolvoIsRequired() throws Exception {
+        int databaseSizeBeforeTest = smartphoneRepository.findAll().size();
+        // set the field null
+        smartphone.setProteccionPolvo(null);
+
+        // Create the Smartphone, which fails.
+
+        restSmartphoneMockMvc.perform(post("/api/smartphones")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(smartphone)))
+            .andExpect(status().isBadRequest());
+
+        List<Smartphone> smartphoneList = smartphoneRepository.findAll();
+        assertThat(smartphoneList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkProteccionLiquidoIsRequired() throws Exception {
+        int databaseSizeBeforeTest = smartphoneRepository.findAll().size();
+        // set the field null
+        smartphone.setProteccionLiquido(null);
+
+        // Create the Smartphone, which fails.
+
+        restSmartphoneMockMvc.perform(post("/api/smartphones")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(smartphone)))
+            .andExpect(status().isBadRequest());
+
+        List<Smartphone> smartphoneList = smartphoneRepository.findAll();
+        assertThat(smartphoneList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllSmartphones() throws Exception {
         // Initialize the database
         smartphoneRepository.saveAndFlush(smartphone);
@@ -365,16 +433,19 @@ public class SmartphoneResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(smartphone.getId().intValue())))
-            .andExpect(jsonPath("$.[*].modelo").value(hasItem(DEFAULT_MODELO.toString())))
             .andExpect(jsonPath("$.[*].marca").value(hasItem(DEFAULT_MARCA.toString())))
-            .andExpect(jsonPath("$.[*].camara").value(hasItem(DEFAULT_CAMARA.doubleValue())))
-            .andExpect(jsonPath("$.[*].frontCamara").value(hasItem(DEFAULT_FRONT_CAMARA.doubleValue())))
+            .andExpect(jsonPath("$.[*].modelo").value(hasItem(DEFAULT_MODELO.toString())))
+            .andExpect(jsonPath("$.[*].camara").value(hasItem(DEFAULT_CAMARA)))
+            .andExpect(jsonPath("$.[*].frontCamara").value(hasItem(DEFAULT_FRONT_CAMARA)))
             .andExpect(jsonPath("$.[*].bateria").value(hasItem(DEFAULT_BATERIA)))
             .andExpect(jsonPath("$.[*].pulgadasPantalla").value(hasItem(DEFAULT_PULGADAS_PANTALLA.doubleValue())))
-            .andExpect(jsonPath("$.[*].resolucionPantalla").value(hasItem(DEFAULT_RESOLUCION_PANTALLA.toString())))
-            .andExpect(jsonPath("$.[*].ram").value(hasItem(DEFAULT_RAM)))
+            .andExpect(jsonPath("$.[*].resolucionPantallaAlto").value(hasItem(DEFAULT_RESOLUCION_PANTALLA_ALTO)))
+            .andExpect(jsonPath("$.[*].resolucionPantallaAncho").value(hasItem(DEFAULT_RESOLUCION_PANTALLA_ANCHO)))
+            .andExpect(jsonPath("$.[*].ram").value(hasItem(DEFAULT_RAM.doubleValue())))
             .andExpect(jsonPath("$.[*].so").value(hasItem(DEFAULT_SO.toString())))
-            .andExpect(jsonPath("$.[*].rom").value(hasItem(DEFAULT_ROM)));
+            .andExpect(jsonPath("$.[*].rom").value(hasItem(DEFAULT_ROM)))
+            .andExpect(jsonPath("$.[*].proteccionPolvo").value(hasItem(DEFAULT_PROTECCION_POLVO)))
+            .andExpect(jsonPath("$.[*].proteccionLiquido").value(hasItem(DEFAULT_PROTECCION_LIQUIDO)));
     }
 
     @Test
@@ -388,16 +459,19 @@ public class SmartphoneResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(smartphone.getId().intValue()))
-            .andExpect(jsonPath("$.modelo").value(DEFAULT_MODELO.toString()))
             .andExpect(jsonPath("$.marca").value(DEFAULT_MARCA.toString()))
-            .andExpect(jsonPath("$.camara").value(DEFAULT_CAMARA.doubleValue()))
-            .andExpect(jsonPath("$.frontCamara").value(DEFAULT_FRONT_CAMARA.doubleValue()))
+            .andExpect(jsonPath("$.modelo").value(DEFAULT_MODELO.toString()))
+            .andExpect(jsonPath("$.camara").value(DEFAULT_CAMARA))
+            .andExpect(jsonPath("$.frontCamara").value(DEFAULT_FRONT_CAMARA))
             .andExpect(jsonPath("$.bateria").value(DEFAULT_BATERIA))
             .andExpect(jsonPath("$.pulgadasPantalla").value(DEFAULT_PULGADAS_PANTALLA.doubleValue()))
-            .andExpect(jsonPath("$.resolucionPantalla").value(DEFAULT_RESOLUCION_PANTALLA.toString()))
-            .andExpect(jsonPath("$.ram").value(DEFAULT_RAM))
+            .andExpect(jsonPath("$.resolucionPantallaAlto").value(DEFAULT_RESOLUCION_PANTALLA_ALTO))
+            .andExpect(jsonPath("$.resolucionPantallaAncho").value(DEFAULT_RESOLUCION_PANTALLA_ANCHO))
+            .andExpect(jsonPath("$.ram").value(DEFAULT_RAM.doubleValue()))
             .andExpect(jsonPath("$.so").value(DEFAULT_SO.toString()))
-            .andExpect(jsonPath("$.rom").value(DEFAULT_ROM));
+            .andExpect(jsonPath("$.rom").value(DEFAULT_ROM))
+            .andExpect(jsonPath("$.proteccionPolvo").value(DEFAULT_PROTECCION_POLVO))
+            .andExpect(jsonPath("$.proteccionLiquido").value(DEFAULT_PROTECCION_LIQUIDO));
     }
 
     @Test
@@ -419,16 +493,19 @@ public class SmartphoneResourceIntTest {
         // Update the smartphone
         Smartphone updatedSmartphone = smartphoneRepository.findOne(smartphone.getId());
         updatedSmartphone
-                .modelo(UPDATED_MODELO)
                 .marca(UPDATED_MARCA)
+                .modelo(UPDATED_MODELO)
                 .camara(UPDATED_CAMARA)
                 .frontCamara(UPDATED_FRONT_CAMARA)
                 .bateria(UPDATED_BATERIA)
                 .pulgadasPantalla(UPDATED_PULGADAS_PANTALLA)
-                .resolucionPantalla(UPDATED_RESOLUCION_PANTALLA)
+                .resolucionPantallaAlto(UPDATED_RESOLUCION_PANTALLA_ALTO)
+                .resolucionPantallaAncho(UPDATED_RESOLUCION_PANTALLA_ANCHO)
                 .ram(UPDATED_RAM)
                 .so(UPDATED_SO)
-                .rom(UPDATED_ROM);
+                .rom(UPDATED_ROM)
+                .proteccionPolvo(UPDATED_PROTECCION_POLVO)
+                .proteccionLiquido(UPDATED_PROTECCION_LIQUIDO);
 
         restSmartphoneMockMvc.perform(put("/api/smartphones")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -439,16 +516,19 @@ public class SmartphoneResourceIntTest {
         List<Smartphone> smartphoneList = smartphoneRepository.findAll();
         assertThat(smartphoneList).hasSize(databaseSizeBeforeUpdate);
         Smartphone testSmartphone = smartphoneList.get(smartphoneList.size() - 1);
-        assertThat(testSmartphone.getModelo()).isEqualTo(UPDATED_MODELO);
         assertThat(testSmartphone.getMarca()).isEqualTo(UPDATED_MARCA);
+        assertThat(testSmartphone.getModelo()).isEqualTo(UPDATED_MODELO);
         assertThat(testSmartphone.getCamara()).isEqualTo(UPDATED_CAMARA);
         assertThat(testSmartphone.getFrontCamara()).isEqualTo(UPDATED_FRONT_CAMARA);
         assertThat(testSmartphone.getBateria()).isEqualTo(UPDATED_BATERIA);
         assertThat(testSmartphone.getPulgadasPantalla()).isEqualTo(UPDATED_PULGADAS_PANTALLA);
-        assertThat(testSmartphone.getResolucionPantalla()).isEqualTo(UPDATED_RESOLUCION_PANTALLA);
+        assertThat(testSmartphone.getResolucionPantallaAlto()).isEqualTo(UPDATED_RESOLUCION_PANTALLA_ALTO);
+        assertThat(testSmartphone.getResolucionPantallaAncho()).isEqualTo(UPDATED_RESOLUCION_PANTALLA_ANCHO);
         assertThat(testSmartphone.getRam()).isEqualTo(UPDATED_RAM);
         assertThat(testSmartphone.getSo()).isEqualTo(UPDATED_SO);
         assertThat(testSmartphone.getRom()).isEqualTo(UPDATED_ROM);
+        assertThat(testSmartphone.getProteccionPolvo()).isEqualTo(UPDATED_PROTECCION_POLVO);
+        assertThat(testSmartphone.getProteccionLiquido()).isEqualTo(UPDATED_PROTECCION_LIQUIDO);
     }
 
     @Test

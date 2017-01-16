@@ -3,13 +3,6 @@
     "relationships": [],
     "fields": [
         {
-            "fieldName": "modelo",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
             "fieldName": "marca",
             "fieldType": "EnumMarca",
             "fieldValues": "Samsung, Apple, Nokia, Huawai, BlackBerry",
@@ -18,15 +11,22 @@
             ]
         },
         {
+            "fieldName": "modelo",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
             "fieldName": "camara",
-            "fieldType": "Double",
+            "fieldType": "Integer",
             "fieldValidateRules": [
                 "required"
             ]
         },
         {
             "fieldName": "frontCamara",
-            "fieldType": "Double",
+            "fieldType": "Integer",
             "fieldValidateRules": [
                 "required"
             ]
@@ -46,16 +46,22 @@
             ]
         },
         {
-            "fieldName": "resolucionPantalla",
-            "fieldType": "EnumResolucionPantalla",
-            "fieldValues": "CuatroK, Mil_440p, FullHD, HD, XGA, VGA",
+            "fieldName": "resolucionPantallaAlto",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "resolucionPantallaAncho",
+            "fieldType": "Integer",
             "fieldValidateRules": [
                 "required"
             ]
         },
         {
             "fieldName": "ram",
-            "fieldType": "Integer",
+            "fieldType": "Double",
             "fieldValidateRules": [
                 "required"
             ]
@@ -70,6 +76,20 @@
         },
         {
             "fieldName": "rom",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "proteccionPolvo",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "proteccionLiquido",
             "fieldType": "Integer",
             "fieldValidateRules": [
                 "required"

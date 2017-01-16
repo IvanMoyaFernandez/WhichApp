@@ -27,7 +27,6 @@
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('smartphone');
                     $translatePartialLoader.addPart('enumMarca');
-                    $translatePartialLoader.addPart('enumResolucionPantalla');
                     $translatePartialLoader.addPart('enumOS');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
@@ -52,7 +51,6 @@
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('smartphone');
                     $translatePartialLoader.addPart('enumMarca');
-                    $translatePartialLoader.addPart('enumResolucionPantalla');
                     $translatePartialLoader.addPart('enumOS');
                     return $translate.refresh();
                 }],
@@ -110,16 +108,19 @@
                     resolve: {
                         entity: function () {
                             return {
-                                modelo: null,
                                 marca: null,
+                                modelo: null,
                                 camara: null,
                                 frontCamara: null,
                                 bateria: null,
                                 pulgadasPantalla: null,
-                                resolucionPantalla: null,
+                                resolucionPantallaAlto: null,
+                                resolucionPantallaAncho: null,
                                 ram: null,
                                 so: null,
                                 rom: null,
+                                proteccionPolvo: null,
+                                proteccionLiquido: null,
                                 id: null
                             };
                         }

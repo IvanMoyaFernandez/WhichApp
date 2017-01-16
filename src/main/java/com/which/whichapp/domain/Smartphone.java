@@ -8,13 +8,8 @@ import java.util.Objects;
 
 import com.which.whichapp.domain.enumeration.EnumMarca;
 
-import com.which.whichapp.domain.enumeration.EnumResolucionPantalla;
-
 import com.which.whichapp.domain.enumeration.EnumOS;
 
-/**
- * A Smartphone.
- */
 @Entity
 @Table(name = "smartphone")
 public class Smartphone implements Serializable {
@@ -26,21 +21,21 @@ public class Smartphone implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "modelo", nullable = false)
-    private String modelo;
-
-    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "marca", nullable = false)
     private EnumMarca marca;
 
     @NotNull
+    @Column(name = "modelo", nullable = false)
+    private String modelo;
+
+    @NotNull
     @Column(name = "camara", nullable = false)
-    private Double camara;
+    private Integer camara;
 
     @NotNull
     @Column(name = "front_camara", nullable = false)
-    private Double frontCamara;
+    private Integer frontCamara;
 
     @NotNull
     @Column(name = "bateria", nullable = false)
@@ -51,13 +46,16 @@ public class Smartphone implements Serializable {
     private Double pulgadasPantalla;
 
     @NotNull
-    @Enumerated(EnumType.STRING)
-    @Column(name = "resolucion_pantalla", nullable = false)
-    private EnumResolucionPantalla resolucionPantalla;
+    @Column(name = "resolucion_pantalla_alto", nullable = false)
+    private Integer resolucionPantallaAlto;
+
+    @NotNull
+    @Column(name = "resolucion_pantalla_ancho", nullable = false)
+    private Integer resolucionPantallaAncho;
 
     @NotNull
     @Column(name = "ram", nullable = false)
-    private Integer ram;
+    private Double ram;
 
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -68,25 +66,20 @@ public class Smartphone implements Serializable {
     @Column(name = "rom", nullable = false)
     private Integer rom;
 
+    @NotNull
+    @Column(name = "proteccion_polvo", nullable = false)
+    private Integer proteccionPolvo;
+
+    @NotNull
+    @Column(name = "proteccion_liquido", nullable = false)
+    private Integer proteccionLiquido;
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getModelo() {
-        return modelo;
-    }
-
-    public Smartphone modelo(String modelo) {
-        this.modelo = modelo;
-        return this;
-    }
-
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
     }
 
     public EnumMarca getMarca() {
@@ -102,29 +95,42 @@ public class Smartphone implements Serializable {
         this.marca = marca;
     }
 
-    public Double getCamara() {
+    public String getModelo() {
+        return modelo;
+    }
+
+    public Smartphone modelo(String modelo) {
+        this.modelo = modelo;
+        return this;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public Integer getCamara() {
         return camara;
     }
 
-    public Smartphone camara(Double camara) {
+    public Smartphone camara(Integer camara) {
         this.camara = camara;
         return this;
     }
 
-    public void setCamara(Double camara) {
+    public void setCamara(Integer camara) {
         this.camara = camara;
     }
 
-    public Double getFrontCamara() {
+    public Integer getFrontCamara() {
         return frontCamara;
     }
 
-    public Smartphone frontCamara(Double frontCamara) {
+    public Smartphone frontCamara(Integer frontCamara) {
         this.frontCamara = frontCamara;
         return this;
     }
 
-    public void setFrontCamara(Double frontCamara) {
+    public void setFrontCamara(Integer frontCamara) {
         this.frontCamara = frontCamara;
     }
 
@@ -154,29 +160,42 @@ public class Smartphone implements Serializable {
         this.pulgadasPantalla = pulgadasPantalla;
     }
 
-    public EnumResolucionPantalla getResolucionPantalla() {
-        return resolucionPantalla;
+    public Integer getResolucionPantallaAlto() {
+        return resolucionPantallaAlto;
     }
 
-    public Smartphone resolucionPantalla(EnumResolucionPantalla resolucionPantalla) {
-        this.resolucionPantalla = resolucionPantalla;
+    public Smartphone resolucionPantallaAlto(Integer resolucionPantallaAlto) {
+        this.resolucionPantallaAlto = resolucionPantallaAlto;
         return this;
     }
 
-    public void setResolucionPantalla(EnumResolucionPantalla resolucionPantalla) {
-        this.resolucionPantalla = resolucionPantalla;
+    public void setResolucionPantallaAlto(Integer resolucionPantallaAlto) {
+        this.resolucionPantallaAlto = resolucionPantallaAlto;
     }
 
-    public Integer getRam() {
+    public Integer getResolucionPantallaAncho() {
+        return resolucionPantallaAncho;
+    }
+
+    public Smartphone resolucionPantallaAncho(Integer resolucionPantallaAncho) {
+        this.resolucionPantallaAncho = resolucionPantallaAncho;
+        return this;
+    }
+
+    public void setResolucionPantallaAncho(Integer resolucionPantallaAncho) {
+        this.resolucionPantallaAncho = resolucionPantallaAncho;
+    }
+
+    public Double getRam() {
         return ram;
     }
 
-    public Smartphone ram(Integer ram) {
+    public Smartphone ram(Double ram) {
         this.ram = ram;
         return this;
     }
 
-    public void setRam(Integer ram) {
+    public void setRam(Double ram) {
         this.ram = ram;
     }
 
@@ -206,6 +225,32 @@ public class Smartphone implements Serializable {
         this.rom = rom;
     }
 
+    public Integer getProteccionPolvo() {
+        return proteccionPolvo;
+    }
+
+    public Smartphone proteccionPolvo(Integer proteccionPolvo) {
+        this.proteccionPolvo = proteccionPolvo;
+        return this;
+    }
+
+    public void setProteccionPolvo(Integer proteccionPolvo) {
+        this.proteccionPolvo = proteccionPolvo;
+    }
+
+    public Integer getProteccionLiquido() {
+        return proteccionLiquido;
+    }
+
+    public Smartphone proteccionLiquido(Integer proteccionLiquido) {
+        this.proteccionLiquido = proteccionLiquido;
+        return this;
+    }
+
+    public void setProteccionLiquido(Integer proteccionLiquido) {
+        this.proteccionLiquido = proteccionLiquido;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -230,16 +275,19 @@ public class Smartphone implements Serializable {
     public String toString() {
         return "Smartphone{" +
             "id=" + id +
-            ", modelo='" + modelo + "'" +
             ", marca='" + marca + "'" +
+            ", modelo='" + modelo + "'" +
             ", camara='" + camara + "'" +
             ", frontCamara='" + frontCamara + "'" +
             ", bateria='" + bateria + "'" +
             ", pulgadasPantalla='" + pulgadasPantalla + "'" +
-            ", resolucionPantalla='" + resolucionPantalla + "'" +
+            ", resolucionPantallaAlto='" + resolucionPantallaAlto + "'" +
+            ", resolucionPantallaAncho='" + resolucionPantallaAncho + "'" +
             ", ram='" + ram + "'" +
             ", so='" + so + "'" +
             ", rom='" + rom + "'" +
+            ", proteccionPolvo='" + proteccionPolvo + "'" +
+            ", proteccionLiquido='" + proteccionLiquido + "'" +
             '}';
     }
 }

@@ -16,16 +16,19 @@
             "detail": {
                 "title": "Smartphone"
             },
-            "modelo": "Modelo",
             "marca": "Marca",
+            "modelo": "Modelo",
             "camara": "Camara",
             "frontCamara": "Front Camara",
             "bateria": "Bateria",
             "pulgadasPantalla": "Pulgadas Pantalla",
-            "resolucionPantalla": "Resolucion Pantalla",
+            "resolucionPantallaAlto": "Resolucion Pantalla Alto",
+            "resolucionPantallaAncho": "Resolucion Pantalla Ancho",
             "ram": "Ram",
             "so": "So",
-            "rom": "Rom"
+            "rom": "Rom",
+            "proteccionPolvo": "Proteccion Polvo",
+            "proteccionLiquido": "Proteccion Liquido"
         }
     }
 }
