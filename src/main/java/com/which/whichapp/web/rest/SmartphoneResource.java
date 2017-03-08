@@ -2,6 +2,7 @@ package com.which.whichapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.which.whichapp.domain.Smartphone;
+import com.which.whichapp.repository.SmartphoneRepository;
 import com.which.whichapp.service.SmartphoneService;
 import com.which.whichapp.web.rest.util.HeaderUtil;
 
@@ -27,9 +28,10 @@ import java.util.Optional;
 public class SmartphoneResource {
 
     private final Logger log = LoggerFactory.getLogger(SmartphoneResource.class);
-        
+
     @Inject
     private SmartphoneService smartphoneService;
+    private SmartphoneRepository smartphoneRepository;
 
     /**
      * POST  /smartphones : Create a new smartphone.
@@ -117,4 +119,14 @@ public class SmartphoneResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("smartphone", id.toString())).build();
     }
 
+// FILTROS
+
+    // Devolver Smartphones que coincidan con el modelo
+    @GetMapping("/smartphones/byModelo/{modelo}")
+    @Timed
+    public List<Smartphone> getSmartphoneByModelo(@PathVariable String modelo) {
+        log.debug("REST request to get Smartphone : {}", modelo);
+        List<Smartphone> modelos = smartphoneRepository.findByModeloContaining(modelo);
+        return modelos;
+    }
 }

@@ -12,4 +12,7 @@ import java.util.List;
 @SuppressWarnings("unused")
 public interface SmartphoneRepository extends JpaRepository<Smartphone,Long> {
 
+    // Buscar Smartphone por nombre
+    List<Smartphone> findByModeloContaining(String modelo);
+
 }

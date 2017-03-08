@@ -5,7 +5,7 @@
         {
             "fieldName": "marca",
             "fieldType": "EnumMarca",
-            "fieldValues": "Samsung, Apple, Nokia, Huawai, BlackBerry",
+            "fieldValues": "Samsung, Apple, Nokia, Huawai, BlackBerry, Bq",
             "fieldValidateRules": [
                 "required"
             ]
@@ -46,7 +46,7 @@
             ]
         },
         {
-            "fieldName": "resolucionPantallaAlto",
+            "fieldName": "resolucion_pantalla_alto",
             "fieldType": "Integer",
             "fieldValidateRules": [
                 "required"
