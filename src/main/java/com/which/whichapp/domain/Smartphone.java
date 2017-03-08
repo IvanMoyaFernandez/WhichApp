@@ -1,6 +1,6 @@
 package com.which.whichapp.domain;
 
-// CAMBIO
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
