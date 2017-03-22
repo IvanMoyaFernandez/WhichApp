@@ -1,5 +1,6 @@
 package com.which.whichapp.service.impl;
 
+import com.which.whichapp.domain.enumeration.EnumMarca;
 import com.which.whichapp.service.SmartphoneService;
 import com.which.whichapp.domain.Smartphone;
 import com.which.whichapp.repository.SmartphoneRepository;
@@ -19,7 +20,7 @@ import java.util.List;
 public class SmartphoneServiceImpl implements SmartphoneService{
 
     private final Logger log = LoggerFactory.getLogger(SmartphoneServiceImpl.class);
-    
+
     @Inject
     private SmartphoneRepository smartphoneRepository;
 
@@ -37,10 +38,10 @@ public class SmartphoneServiceImpl implements SmartphoneService{
 
     /**
      *  Get all the smartphones.
-     *  
+     *
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public List<Smartphone> findAll() {
         log.debug("Request to get all Smartphones");
         List<Smartphone> result = smartphoneRepository.findAll();
@@ -54,7 +55,7 @@ public class SmartphoneServiceImpl implements SmartphoneService{
      *  @param id the id of the entity
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Smartphone findOne(Long id) {
         log.debug("Request to get Smartphone : {}", id);
         Smartphone smartphone = smartphoneRepository.findOne(id);
@@ -69,5 +70,17 @@ public class SmartphoneServiceImpl implements SmartphoneService{
     public void delete(Long id) {
         log.debug("Request to delete Smartphone : {}", id);
         smartphoneRepository.delete(id);
+    }
+
+    @Override
+    public List<Smartphone> findByModeloContaining(String modelo) {
+        List<Smartphone> modelos = smartphoneRepository.findByModeloContaining(modelo);
+        return modelos;
+    }
+
+    @Override
+        public List<Smartphone> findByMarcaLike(EnumMarca marca) { // --> SmartphoneService.java
+        List<Smartphone> modelos = smartphoneRepository.findByMarcaLike(marca);
+        return modelos;
     }
 }

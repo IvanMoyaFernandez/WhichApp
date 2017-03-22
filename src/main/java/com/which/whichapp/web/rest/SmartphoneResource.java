@@ -2,6 +2,7 @@ package com.which.whichapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.which.whichapp.domain.Smartphone;
+import com.which.whichapp.domain.enumeration.EnumMarca;
 import com.which.whichapp.repository.SmartphoneRepository;
 import com.which.whichapp.service.SmartphoneService;
 import com.which.whichapp.web.rest.util.HeaderUtil;
@@ -126,7 +127,16 @@ public class SmartphoneResource {
     @Timed
     public List<Smartphone> getSmartphoneByModelo(@PathVariable String modelo) {
         log.debug("REST request to get Smartphone : {}", modelo);
-        List<Smartphone> modelos = smartphoneRepository.findByModeloContaining(modelo);
+        List<Smartphone> modelos = smartphoneService.findByModeloContaining(modelo);
+        return modelos;
+    }
+
+    // Devolver Smartphones que coincidan con la marca --> SmartphoneServiceImpl.java
+    @GetMapping("/smartphones/byMarca/{marca}")
+    @Timed
+    public List<Smartphone> getSmartphoneByMarca(@PathVariable EnumMarca marca) {
+        log.debug("REST request to get Smartphone : {}", marca);
+        List<Smartphone> modelos = smartphoneService.findByMarcaLike(marca);
         return modelos;
     }
 }

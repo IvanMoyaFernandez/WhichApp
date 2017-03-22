@@ -2,6 +2,7 @@ package com.which.whichapp.repository;
 
 import com.which.whichapp.domain.Smartphone;
 
+import com.which.whichapp.domain.enumeration.EnumMarca;
 import org.springframework.data.jpa.repository.*;
 
 import java.util.List;
@@ -12,7 +13,8 @@ import java.util.List;
 @SuppressWarnings("unused")
 public interface SmartphoneRepository extends JpaRepository<Smartphone,Long> {
 
-    // Buscar Smartphone por nombre
+    // Buscar Smartphone por modelo
     List<Smartphone> findByModeloContaining(String modelo);
-
+    // Buscar Smartphone por marca
+    List<Smartphone> findByMarcaLike(EnumMarca marca);
 }
