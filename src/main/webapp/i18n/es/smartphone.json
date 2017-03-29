@@ -18,17 +18,20 @@
             },
             "marca": "Marca",
             "modelo": "Modelo",
-            "camara": "Camara Trasera",
-            "frontCamara": "Camara Frontal",
+            "camara": "Camara",
+            "frontCamara": "Front Camara",
             "bateria": "Bateria",
-            "pulgadasPantalla": "Pulgadas",
-            "resolucionPantallaAlto": "Resolucion Pantalla Alto",
+            "pulgadasPantalla": "Pulgadas Pantalla",
+            "resolucion_pantalla_alto": "Resolucion Pantalla Alto",
             "resolucionPantallaAncho": "Resolucion Pantalla Ancho",
             "ram": "Ram",
             "so": "So",
             "rom": "Rom",
             "proteccionPolvo": "Proteccion Polvo",
-            "proteccionLiquido": "Proteccion Liquido"
+            "proteccionLiquido": "Proteccion Liquido",
+            "puntuacion": "Puntuacion",
+            "descripcion": "Descripcion",
+            "fecha_lanzamiento": "Fecha Lanzamiento"
         }
     }
 }

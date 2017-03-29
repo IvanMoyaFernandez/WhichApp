@@ -4,6 +4,7 @@ package com.which.whichapp.domain;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Objects;
 
 import com.which.whichapp.domain.enumeration.EnumMarca;
@@ -50,7 +51,7 @@ public class Smartphone implements Serializable {
 
     @NotNull
     @Column(name = "resolucion_pantalla_alto", nullable = false)
-    private Integer resolucionPantallaAlto;
+    private Integer resolucion_pantalla_alto;
 
     @NotNull
     @Column(name = "resolucion_pantalla_ancho", nullable = false)
@@ -76,6 +77,20 @@ public class Smartphone implements Serializable {
     @NotNull
     @Column(name = "proteccion_liquido", nullable = false)
     private Integer proteccionLiquido;
+
+    @NotNull
+    @Min(value = 0)
+    @Max(value = 100)
+    @Column(name = "puntuacion", nullable = false)
+    private Integer puntuacion;
+
+    @NotNull
+    @Column(name = "descripcion", nullable = false)
+    private String descripcion;
+
+    @NotNull
+    @Column(name = "fecha_lanzamiento", nullable = false)
+    private LocalDate fecha_lanzamiento;
 
     public Long getId() {
         return id;
@@ -163,17 +178,17 @@ public class Smartphone implements Serializable {
         this.pulgadasPantalla = pulgadasPantalla;
     }
 
-    public Integer getResolucionPantallaAlto() {
-        return resolucionPantallaAlto;
+    public Integer getResolucion_pantalla_alto() {
+        return resolucion_pantalla_alto;
     }
 
-    public Smartphone resolucionPantallaAlto(Integer resolucionPantallaAlto) {
-        this.resolucionPantallaAlto = resolucionPantallaAlto;
+    public Smartphone resolucion_pantalla_alto(Integer resolucion_pantalla_alto) {
+        this.resolucion_pantalla_alto = resolucion_pantalla_alto;
         return this;
     }
 
-    public void setResolucionPantallaAlto(Integer resolucionPantallaAlto) {
-        this.resolucionPantallaAlto = resolucionPantallaAlto;
+    public void setResolucion_pantalla_alto(Integer resolucion_pantalla_alto) {
+        this.resolucion_pantalla_alto = resolucion_pantalla_alto;
     }
 
     public Integer getResolucionPantallaAncho() {
@@ -254,6 +269,45 @@ public class Smartphone implements Serializable {
         this.proteccionLiquido = proteccionLiquido;
     }
 
+    public Integer getPuntuacion() {
+        return puntuacion;
+    }
+
+    public Smartphone puntuacion(Integer puntuacion) {
+        this.puntuacion = puntuacion;
+        return this;
+    }
+
+    public void setPuntuacion(Integer puntuacion) {
+        this.puntuacion = puntuacion;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public Smartphone descripcion(String descripcion) {
+        this.descripcion = descripcion;
+        return this;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public LocalDate getFecha_lanzamiento() {
+        return fecha_lanzamiento;
+    }
+
+    public Smartphone fecha_lanzamiento(LocalDate fecha_lanzamiento) {
+        this.fecha_lanzamiento = fecha_lanzamiento;
+        return this;
+    }
+
+    public void setFecha_lanzamiento(LocalDate fecha_lanzamiento) {
+        this.fecha_lanzamiento = fecha_lanzamiento;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -284,13 +338,16 @@ public class Smartphone implements Serializable {
             ", frontCamara='" + frontCamara + "'" +
             ", bateria='" + bateria + "'" +
             ", pulgadasPantalla='" + pulgadasPantalla + "'" +
-            ", resolucionPantallaAlto='" + resolucionPantallaAlto + "'" +
+            ", resolucion_pantalla_alto='" + resolucion_pantalla_alto + "'" +
             ", resolucionPantallaAncho='" + resolucionPantallaAncho + "'" +
             ", ram='" + ram + "'" +
             ", so='" + so + "'" +
             ", rom='" + rom + "'" +
             ", proteccionPolvo='" + proteccionPolvo + "'" +
             ", proteccionLiquido='" + proteccionLiquido + "'" +
+            ", puntuacion='" + puntuacion + "'" +
+            ", descripcion='" + descripcion + "'" +
+            ", fecha_lanzamiento='" + fecha_lanzamiento + "'" +
             '}';
     }
 }

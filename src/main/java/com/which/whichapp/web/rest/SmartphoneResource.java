@@ -2,12 +2,8 @@ package com.which.whichapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.which.whichapp.domain.Smartphone;
-import com.which.whichapp.domain.enumeration.EnumMarca;
-import com.which.whichapp.domain.enumeration.EnumOS;
-import com.which.whichapp.repository.SmartphoneRepository;
 import com.which.whichapp.service.SmartphoneService;
 import com.which.whichapp.web.rest.util.HeaderUtil;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -30,10 +26,9 @@ import java.util.Optional;
 public class SmartphoneResource {
 
     private final Logger log = LoggerFactory.getLogger(SmartphoneResource.class);
-
+        
     @Inject
     private SmartphoneService smartphoneService;
-    private SmartphoneRepository smartphoneRepository;
 
     /**
      * POST  /smartphones : Create a new smartphone.
@@ -121,32 +116,4 @@ public class SmartphoneResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("smartphone", id.toString())).build();
     }
 
-// FILTROS
-
-    // Devolver Smartphones que coincidan con el modelo
-    @GetMapping("/smartphones/byModelo/{modelo}")
-    @Timed
-    public List<Smartphone> getSmartphoneByModelo(@PathVariable String modelo) {
-        log.debug("REST request to get Smartphone : {}", modelo);
-        List<Smartphone> modelos = smartphoneService.findByModeloContaining(modelo);
-        return modelos;
-    }
-
-    // Devolver Smartphones que coincidan con la marca --> SmartphoneServiceImpl.java
-    @GetMapping("/smartphones/byMarca/{marca}")
-    @Timed
-    public List<Smartphone> getSmartphoneByMarca(@PathVariable EnumMarca marca) {
-        log.debug("REST request to get Smartphone : {}", marca);
-        List<Smartphone> modelos = smartphoneService.findByMarcaLike(marca);
-        return modelos;
-    }
-
-    // Devolver Smartphones que coincidan con el so --> SmartphoneServiceImpl.java
-    @GetMapping("/smartphones/bySo/{so}")
-    @Timed
-    public List<Smartphone> getSmartphoneBySo(@PathVariable EnumOS so) {
-        log.debug("REST request to get Smartphone : {}", so);
-        List<Smartphone> modelos = smartphoneService.findBySoLike(so);
-        return modelos;
-    }
 }

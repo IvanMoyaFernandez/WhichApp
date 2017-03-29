@@ -114,13 +114,16 @@
                                 frontCamara: null,
                                 bateria: null,
                                 pulgadasPantalla: null,
-                                resolucionPantallaAlto: null,
+                                resolucion_pantalla_alto: null,
                                 resolucionPantallaAncho: null,
                                 ram: null,
                                 so: null,
                                 rom: null,
                                 proteccionPolvo: null,
                                 proteccionLiquido: null,
+                                puntuacion: null,
+                                descripcion: null,
+                                fecha_lanzamiento: null,
                                 id: null
                             };
                         }

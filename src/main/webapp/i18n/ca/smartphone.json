@@ -3,32 +3,35 @@
         "smartphone" : {
             "home": {
                 "title": "Smartphones",
-                "createLabel": "Crear un nou Smartphone",
-                "createOrEditLabel": "Crear o editar un Smartphone",
+                "createLabel": "Create a new Smartphone",
+                "createOrEditLabel": "Create or edit a Smartphone",
                 "search": "Search for Smartphone"
             },
-            "created": "Un nou Smartphone ha sigut creat amb identificador {{ param }}",
-            "updated": "Un Smartphone ha sigut actualizat amb identificador {{ param }}",
-            "deleted": "Un Smartphone ha sigut esborrat amb identificador {{ param }}",
+            "created": "A new Smartphone is created with identifier {{ param }}",
+            "updated": "A Smartphone is updated with identifier {{ param }}",
+            "deleted": "A Smartphone is deleted with identifier {{ param }}",
             "delete": {
-                "question": "Estas segur de que vols esborrar Smartphone {{ id }}?"
+                "question": "Are you sure you want to delete Smartphone {{ id }}?"
             },
             "detail": {
                 "title": "Smartphone"
             },
             "marca": "Marca",
-            "modelo": "Model",
-            "camara": "Camara Posterior",
-            "frontCamara": "Camara Frontal",
+            "modelo": "Modelo",
+            "camara": "Camara",
+            "frontCamara": "Front Camara",
             "bateria": "Bateria",
-            "pulgadasPantalla": "Pulzades",
-            "resolucionPantallaAlto": "Resolució Pantalla Alt",
-            "resolucionPantallaAncho": "Resolució Pantalla Ample",
+            "pulgadasPantalla": "Pulgadas Pantalla",
+            "resolucion_pantalla_alto": "Resolucion Pantalla Alto",
+            "resolucionPantallaAncho": "Resolucion Pantalla Ancho",
             "ram": "Ram",
             "so": "So",
             "rom": "Rom",
-            "proteccionPolvo": "Protecció Pols",
-            "proteccionLiquido": "Protecció Liquid"
+            "proteccionPolvo": "Proteccion Polvo",
+            "proteccionLiquido": "Proteccion Liquido",
+            "puntuacion": "Puntuacion",
+            "descripcion": "Descripcion",
+            "fecha_lanzamiento": "Fecha Lanzamiento"
         }
     }
 }

@@ -22,13 +22,16 @@
             "frontCamara": "Front Camara",
             "bateria": "Bateria",
             "pulgadasPantalla": "Pulgadas Pantalla",
-            "resolucionPantallaAlto": "Resolucion Pantalla Alto",
+            "resolucion_pantalla_alto": "Resolucion Pantalla Alto",
             "resolucionPantallaAncho": "Resolucion Pantalla Ancho",
             "ram": "Ram",
             "so": "So",
             "rom": "Rom",
             "proteccionPolvo": "Proteccion Polvo",
-            "proteccionLiquido": "Proteccion Liquido"
+            "proteccionLiquido": "Proteccion Liquido",
+            "puntuacion": "Puntuacion",
+            "descripcion": "Descripcion",
+            "fecha_lanzamiento": "Fecha Lanzamiento"
         }
     }
 }

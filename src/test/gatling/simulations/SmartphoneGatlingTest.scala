@@ -80,7 +80,7 @@ class SmartphoneGatlingTest extends Simulation {
             .exec(http("Create new smartphone")
             .post("/api/smartphones")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "marca":null, "modelo":"SAMPLE_TEXT", "camara":"0", "frontCamara":"0", "bateria":"0", "pulgadasPantalla":null, "resolucionPantallaAlto":"0", "resolucionPantallaAncho":"0", "ram":null, "so":null, "rom":"0", "proteccionPolvo":"0", "proteccionLiquido":"0"}""")).asJSON
+            .body(StringBody("""{"id":null, "marca":null, "modelo":"SAMPLE_TEXT", "camara":"0", "frontCamara":"0", "bateria":"0", "pulgadasPantalla":null, "resolucion_pantalla_alto":"0", "resolucionPantallaAncho":"0", "ram":null, "so":null, "rom":"0", "proteccionPolvo":"0", "proteccionLiquido":"0", "puntuacion":"0", "descripcion":"SAMPLE_TEXT", "fecha_lanzamiento":"2020-01-01T00:00:00.000Z"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_smartphone_url"))).exitHereIfFailed
             .pause(10)

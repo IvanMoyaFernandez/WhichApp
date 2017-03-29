@@ -1,8 +1,6 @@
 package com.which.whichapp.service;
 
 import com.which.whichapp.domain.Smartphone;
-import com.which.whichapp.domain.enumeration.EnumMarca;
-import com.which.whichapp.domain.enumeration.EnumOS;
 
 import java.util.List;
 
@@ -21,7 +19,7 @@ public interface SmartphoneService {
 
     /**
      *  Get all the smartphones.
-     *
+     *  
      *  @return the list of entities
      */
     List<Smartphone> findAll();
@@ -40,8 +38,4 @@ public interface SmartphoneService {
      *  @param id the id of the entity
      */
     void delete(Long id);
-
-    List<Smartphone> findByModeloContaining(String modelo);
-    List<Smartphone> findByMarcaLike(EnumMarca marca); // --> SmartphoneRepository.java
-    List<Smartphone> findBySoLike(EnumOS so); // --> SmartphoneRepository.java
 }

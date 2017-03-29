@@ -25,13 +25,16 @@
                     <th><span data-translate="whichApp.smartphone.frontCamara">Front Camara</span></th>
                     <th><span data-translate="whichApp.smartphone.bateria">Bateria</span></th>
                     <th><span data-translate="whichApp.smartphone.pulgadasPantalla">Pulgadas Pantalla</span></th>
-                    <th><span data-translate="whichApp.smartphone.resolucionPantallaAlto">Resolucion Pantalla Alto</span></th>
+                    <th><span data-translate="whichApp.smartphone.resolucion_pantalla_alto">Resolucion Pantalla Alto</span></th>
                     <th><span data-translate="whichApp.smartphone.resolucionPantallaAncho">Resolucion Pantalla Ancho</span></th>
                     <th><span data-translate="whichApp.smartphone.ram">Ram</span></th>
                     <th><span data-translate="whichApp.smartphone.so">So</span></th>
                     <th><span data-translate="whichApp.smartphone.rom">Rom</span></th>
                     <th><span data-translate="whichApp.smartphone.proteccionPolvo">Proteccion Polvo</span></th>
                     <th><span data-translate="whichApp.smartphone.proteccionLiquido">Proteccion Liquido</span></th>
+                    <th><span data-translate="whichApp.smartphone.puntuacion">Puntuacion</span></th>
+                    <th><span data-translate="whichApp.smartphone.descripcion">Descripcion</span></th>
+                    <th><span data-translate="whichApp.smartphone.fecha_lanzamiento">Fecha Lanzamiento</span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -40,17 +43,20 @@
                     <td><a ui-sref="smartphone-detail({id:smartphone.id})">{{smartphone.id}}</a></td>
                     <td data-translate="{{'whichApp.EnumMarca.' + smartphone.marca}}">{{smartphone.marca}}</td>
                     <td>{{smartphone.modelo}}</td>
-                    <td>{{smartphone.camara}} MP</td>
-                    <td>{{smartphone.frontCamara}} MP</td>
-                    <td>{{smartphone.bateria}} mA</td>
-                    <td>{{smartphone.pulgadasPantalla}}"</td>
-                    <td>{{smartphone.resolucionPantallaAlto}} pixeles</td>
-                    <td>{{smartphone.resolucionPantallaAncho}} pixeles</td>
-                    <td>{{smartphone.ram}} GB</td>
+                    <td>{{smartphone.camara}}</td>
+                    <td>{{smartphone.frontCamara}}</td>
+                    <td>{{smartphone.bateria}}</td>
+                    <td>{{smartphone.pulgadasPantalla}}</td>
+                    <td>{{smartphone.resolucion_pantalla_alto}}</td>
+                    <td>{{smartphone.resolucionPantallaAncho}}</td>
+                    <td>{{smartphone.ram}}</td>
                     <td data-translate="{{'whichApp.EnumOS.' + smartphone.so}}">{{smartphone.so}}</td>
-                    <td>{{smartphone.rom}} GB</td>
+                    <td>{{smartphone.rom}}</td>
                     <td>{{smartphone.proteccionPolvo}}</td>
                     <td>{{smartphone.proteccionLiquido}}</td>
+                    <td>{{smartphone.puntuacion}}</td>
+                    <td>{{smartphone.descripcion}}</td>
+                        <td>{{smartphone.fecha_lanzamiento | date:'mediumDate'}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

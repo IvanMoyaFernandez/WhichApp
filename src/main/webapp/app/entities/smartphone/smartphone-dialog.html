@@ -107,17 +107,17 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label" data-translate="whichApp.smartphone.resolucionPantallaAlto" for="field_resolucionPantallaAlto">Resolucion Pantalla Alto</label>
-            <input type="number" class="form-control" name="resolucionPantallaAlto" id="field_resolucionPantallaAlto"
-                    ng-model="vm.smartphone.resolucionPantallaAlto"
+            <label class="control-label" data-translate="whichApp.smartphone.resolucion_pantalla_alto" for="field_resolucion_pantalla_alto">Resolucion Pantalla Alto</label>
+            <input type="number" class="form-control" name="resolucion_pantalla_alto" id="field_resolucion_pantalla_alto"
+                    ng-model="vm.smartphone.resolucion_pantalla_alto"
                     required />
-            <div ng-show="editForm.resolucionPantallaAlto.$invalid">
+            <div ng-show="editForm.resolucion_pantalla_alto.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.resolucionPantallaAlto.$error.required" data-translate="entity.validation.required">
+                    ng-show="editForm.resolucion_pantalla_alto.$error.required" data-translate="entity.validation.required">
                     This field is required.
                 </p>
                 <p class="help-block"
-                    ng-show="editForm.resolucionPantallaAlto.$error.number" data-translate="entity.validation.number">
+                    ng-show="editForm.resolucion_pantalla_alto.$error.number" data-translate="entity.validation.number">
                     This field should be a number.
                 </p>
             </div>
@@ -189,7 +189,7 @@
             <label class="control-label" data-translate="whichApp.smartphone.proteccionPolvo" for="field_proteccionPolvo">Proteccion Polvo</label>
             <input type="number" class="form-control" name="proteccionPolvo" id="field_proteccionPolvo"
                     ng-model="vm.smartphone.proteccionPolvo"
-                    required min="0" max="6"/>
+                    required />
             <div ng-show="editForm.proteccionPolvo.$invalid">
                 <p class="help-block"
                     ng-show="editForm.proteccionPolvo.$error.required" data-translate="entity.validation.required">
@@ -205,7 +205,7 @@
             <label class="control-label" data-translate="whichApp.smartphone.proteccionLiquido" for="field_proteccionLiquido">Proteccion Liquido</label>
             <input type="number" class="form-control" name="proteccionLiquido" id="field_proteccionLiquido"
                     ng-model="vm.smartphone.proteccionLiquido"
-                    required min="0" max="9"/>
+                    required />
             <div ng-show="editForm.proteccionLiquido.$invalid">
                 <p class="help-block"
                     ng-show="editForm.proteccionLiquido.$error.required" data-translate="entity.validation.required">
@@ -214,6 +214,58 @@
                 <p class="help-block"
                     ng-show="editForm.proteccionLiquido.$error.number" data-translate="entity.validation.number">
                     This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="whichApp.smartphone.puntuacion" for="field_puntuacion">Puntuacion</label>
+            <input type="number" class="form-control" name="puntuacion" id="field_puntuacion"
+                    ng-model="vm.smartphone.puntuacion"
+                    required min="0" max="100" />
+            <div ng-show="editForm.puntuacion.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.puntuacion.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.puntuacion.$error.min" data-translate="entity.validation.min" translate-value-min="0">
+                    This field should be more than 0.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.puntuacion.$error.max" data-translate="entity.validation.max" translate-value-max="100">
+                    This field cannot be more than 100.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.puntuacion.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="whichApp.smartphone.descripcion" for="field_descripcion">Descripcion</label>
+            <input type="text" class="form-control" name="descripcion" id="field_descripcion"
+                    ng-model="vm.smartphone.descripcion"
+                    required />
+            <div ng-show="editForm.descripcion.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.descripcion.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="whichApp.smartphone.fecha_lanzamiento" for="field_fecha_lanzamiento">Fecha Lanzamiento</label>
+                <div class="input-group">
+                    <input id="field_fecha_lanzamiento" type="text" class="form-control" name="fecha_lanzamiento" uib-datepicker-popup="{{dateformat}}" ng-model="vm.smartphone.fecha_lanzamiento" is-open="vm.datePickerOpenStatus.fecha_lanzamiento"
+                    required/>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('fecha_lanzamiento')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+            <div ng-show="editForm.fecha_lanzamiento.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.fecha_lanzamiento.$error.required" data-translate="entity.validation.required">
+                    This field is required.
                 </p>
             </div>
         </div>
