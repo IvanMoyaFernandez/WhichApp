@@ -115,7 +115,7 @@
         },
         {
             "fieldName": "fecha_lanzamiento",
-            "fieldType": "LocalDate",
+            "fieldType": "Date",
             "fieldValidateRules": [
                 "required"
             ]

@@ -4,7 +4,7 @@ package com.which.whichapp.domain;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 
 import com.which.whichapp.domain.enumeration.EnumMarca;
@@ -90,7 +90,7 @@ public class Smartphone implements Serializable {
 
     @NotNull
     @Column(name = "fecha_lanzamiento", nullable = false)
-    private LocalDate fecha_lanzamiento;
+    private ZonedDateTime fecha_lanzamiento;
 
     public Long getId() {
         return id;
@@ -295,16 +295,16 @@ public class Smartphone implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public LocalDate getFecha_lanzamiento() {
+    public ZonedDateTime getFecha_lanzamiento() {
         return fecha_lanzamiento;
     }
 
-    public Smartphone fecha_lanzamiento(LocalDate fecha_lanzamiento) {
+    public Smartphone fecha_lanzamiento(ZonedDateTime fecha_lanzamiento) {
         this.fecha_lanzamiento = fecha_lanzamiento;
         return this;
     }
 
-    public void setFecha_lanzamiento(LocalDate fecha_lanzamiento) {
+    public void setFecha_lanzamiento(ZonedDateTime fecha_lanzamiento) {
         this.fecha_lanzamiento = fecha_lanzamiento;
     }
 

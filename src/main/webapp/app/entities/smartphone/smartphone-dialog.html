@@ -256,8 +256,8 @@
         <div class="form-group">
             <label class="control-label" data-translate="whichApp.smartphone.fecha_lanzamiento" for="field_fecha_lanzamiento">Fecha Lanzamiento</label>
                 <div class="input-group">
-                    <input id="field_fecha_lanzamiento" type="text" class="form-control" name="fecha_lanzamiento" uib-datepicker-popup="{{dateformat}}" ng-model="vm.smartphone.fecha_lanzamiento" is-open="vm.datePickerOpenStatus.fecha_lanzamiento"
-                    required/>
+                    <input id="field_fecha_lanzamiento" type="text" class="form-control" name="fecha_lanzamiento" datetime-picker="{{dateformat}}" ng-model="vm.smartphone.fecha_lanzamiento" is-open="vm.datePickerOpenStatus.fecha_lanzamiento"
+                    required  />
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="vm.openCalendar('fecha_lanzamiento')"><i class="glyphicon glyphicon-calendar"></i></button>
                     </span>
@@ -266,6 +266,10 @@
                 <p class="help-block"
                     ng-show="editForm.fecha_lanzamiento.$error.required" data-translate="entity.validation.required">
                     This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.fecha_lanzamiento.$error.ZonedDateTimelocal" data-translate="entity.validation.ZonedDateTimelocal">
+                    This field should be a date and time.
                 </p>
             </div>
         </div>

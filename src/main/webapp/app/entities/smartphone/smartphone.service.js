@@ -16,27 +16,12 @@
                 transformResponse: function (data) {
                     if (data) {
                         data = angular.fromJson(data);
-                        data.fecha_lanzamiento = DateUtils.convertLocalDateFromServer(data.fecha_lanzamiento);
+                        data.fecha_lanzamiento = DateUtils.convertDateTimeFromServer(data.fecha_lanzamiento);
                     }
                     return data;
                 }
             },
-            'update': {
-                method: 'PUT',
-                transformRequest: function (data) {
-                    var copy = angular.copy(data);
-                    copy.fecha_lanzamiento = DateUtils.convertLocalDateToServer(copy.fecha_lanzamiento);
-                    return angular.toJson(copy);
-                }
-            },
-            'save': {
-                method: 'POST',
-                transformRequest: function (data) {
-                    var copy = angular.copy(data);
-                    copy.fecha_lanzamiento = DateUtils.convertLocalDateToServer(copy.fecha_lanzamiento);
-                    return angular.toJson(copy);
-                }
-            }
+            'update': { method:'PUT' }
         });
     }
 })();

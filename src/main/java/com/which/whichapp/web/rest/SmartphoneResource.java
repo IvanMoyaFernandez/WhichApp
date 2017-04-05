@@ -2,8 +2,10 @@ package com.which.whichapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.which.whichapp.domain.Smartphone;
+import com.which.whichapp.domain.enumeration.EnumMarca;
 import com.which.whichapp.service.SmartphoneService;
 import com.which.whichapp.web.rest.util.HeaderUtil;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -26,7 +28,7 @@ import java.util.Optional;
 public class SmartphoneResource {
 
     private final Logger log = LoggerFactory.getLogger(SmartphoneResource.class);
-        
+
     @Inject
     private SmartphoneService smartphoneService;
 
@@ -114,6 +116,26 @@ public class SmartphoneResource {
         log.debug("REST request to delete Smartphone : {}", id);
         smartphoneService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("smartphone", id.toString())).build();
+    }
+
+
+    // Devolver Smartphones que coincidan con el modelo --> SmartphoneServiceImpl.java
+    @GetMapping("/smartphones/byModelo/{modelo}")
+    @Timed
+    public List<Smartphone> getSmartphoneByModelo(@PathVariable String modelo) {
+        log.debug("REST request to get Smartphone : {}", modelo);
+        //List<Smartphone> modelos = smartphoneRepository.findByModeloContaining(modelo);
+        List<Smartphone> modelos = smartphoneService.findByModeloContaining(modelo);
+        return modelos;
+    }
+
+    // Devolver Smartphones que coincidan con la marca --> SmartphoneServiceImpl.java
+    @GetMapping("/smartphones/byMarca/{marca}")
+    @Timed
+    public List<Smartphone> getSmartphoneByMarca(@PathVariable EnumMarca marca) {
+        log.debug("REST request to get Smartphone : {}", marca);
+        List<Smartphone> modelos = smartphoneService.findByMarcaLike(marca);
+        return modelos;
     }
 
 }

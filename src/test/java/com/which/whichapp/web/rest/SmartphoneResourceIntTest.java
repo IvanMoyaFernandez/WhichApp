@@ -22,10 +22,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import java.time.LocalDate;
+import java.time.Instant;
+import java.time.ZonedDateTime;
+import java.time.ZoneOffset;
 import java.time.ZoneId;
 import java.util.List;
 
+import static com.which.whichapp.web.rest.TestUtil.sameInstant;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -87,8 +90,8 @@ public class SmartphoneResourceIntTest {
     private static final String DEFAULT_DESCRIPCION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPCION = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_FECHA_LANZAMIENTO = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_FECHA_LANZAMIENTO = LocalDate.now(ZoneId.systemDefault());
+    private static final ZonedDateTime DEFAULT_FECHA_LANZAMIENTO = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private static final ZonedDateTime UPDATED_FECHA_LANZAMIENTO = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
     @Inject
     private SmartphoneRepository smartphoneRepository;
@@ -164,9 +167,9 @@ public class SmartphoneResourceIntTest {
             .andExpect(status().isCreated());
 
         // Validate the Smartphone in the database
-        List<Smartphone> smartphones = smartphoneRepository.findAll();
-        assertThat(smartphones).hasSize(databaseSizeBeforeCreate + 1);
-        Smartphone testSmartphone = smartphones.get(smartphones.size() - 1);
+        List<Smartphone> smartphoneList = smartphoneRepository.findAll();
+        assertThat(smartphoneList).hasSize(databaseSizeBeforeCreate + 1);
+        Smartphone testSmartphone = smartphoneList.get(smartphoneList.size() - 1);
         assertThat(testSmartphone.getMarca()).isEqualTo(DEFAULT_MARCA);
         assertThat(testSmartphone.getModelo()).isEqualTo(DEFAULT_MODELO);
         assertThat(testSmartphone.getCamara()).isEqualTo(DEFAULT_CAMARA);
@@ -187,6 +190,26 @@ public class SmartphoneResourceIntTest {
 
     @Test
     @Transactional
+    public void createSmartphoneWithExistingId() throws Exception {
+        int databaseSizeBeforeCreate = smartphoneRepository.findAll().size();
+
+        // Create the Smartphone with an existing ID
+        Smartphone existingSmartphone = new Smartphone();
+        existingSmartphone.setId(1L);
+
+        // An entity with an existing ID cannot be created, so this API call must fail
+        restSmartphoneMockMvc.perform(post("/api/smartphones")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(existingSmartphone)))
+            .andExpect(status().isBadRequest());
+
+        // Validate the Alice in the database
+        List<Smartphone> smartphoneList = smartphoneRepository.findAll();
+        assertThat(smartphoneList).hasSize(databaseSizeBeforeCreate);
+    }
+
+    @Test
+    @Transactional
     public void checkMarcaIsRequired() throws Exception {
         int databaseSizeBeforeTest = smartphoneRepository.findAll().size();
         // set the field null
@@ -199,8 +222,8 @@ public class SmartphoneResourceIntTest {
             .content(TestUtil.convertObjectToJsonBytes(smartphone)))
             .andExpect(status().isBadRequest());
 
-        List<Smartphone> smartphones = smartphoneRepository.findAll();
-        assertThat(smartphones).hasSize(databaseSizeBeforeTest);
+        List<Smartphone> smartphoneList = smartphoneRepository.findAll();
+        assertThat(smartphoneList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -217,8 +240,8 @@ public class SmartphoneResourceIntTest {
             .content(TestUtil.convertObjectToJsonBytes(smartphone)))
             .andExpect(status().isBadRequest());
 
-        List<Smartphone> smartphones = smartphoneRepository.findAll();
-        assertThat(smartphones).hasSize(databaseSizeBeforeTest);
+        List<Smartphone> smartphoneList = smartphoneRepository.findAll();
+        assertThat(smartphoneList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -235,8 +258,8 @@ public class SmartphoneResourceIntTest {
             .content(TestUtil.convertObjectToJsonBytes(smartphone)))
             .andExpect(status().isBadRequest());
 
-        List<Smartphone> smartphones = smartphoneRepository.findAll();
-        assertThat(smartphones).hasSize(databaseSizeBeforeTest);
+        List<Smartphone> smartphoneList = smartphoneRepository.findAll();
+        assertThat(smartphoneList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -253,8 +276,8 @@ public class SmartphoneResourceIntTest {
             .content(TestUtil.convertObjectToJsonBytes(smartphone)))
             .andExpect(status().isBadRequest());
 
-        List<Smartphone> smartphones = smartphoneRepository.findAll();
-        assertThat(smartphones).hasSize(databaseSizeBeforeTest);
+        List<Smartphone> smartphoneList = smartphoneRepository.findAll();
+        assertThat(smartphoneList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -271,8 +294,8 @@ public class SmartphoneResourceIntTest {
             .content(TestUtil.convertObjectToJsonBytes(smartphone)))
             .andExpect(status().isBadRequest());
 
-        List<Smartphone> smartphones = smartphoneRepository.findAll();
-        assertThat(smartphones).hasSize(databaseSizeBeforeTest);
+        List<Smartphone> smartphoneList = smartphoneRepository.findAll();
+        assertThat(smartphoneList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -289,8 +312,8 @@ public class SmartphoneResourceIntTest {
             .content(TestUtil.convertObjectToJsonBytes(smartphone)))
             .andExpect(status().isBadRequest());
 
-        List<Smartphone> smartphones = smartphoneRepository.findAll();
-        assertThat(smartphones).hasSize(databaseSizeBeforeTest);
+        List<Smartphone> smartphoneList = smartphoneRepository.findAll();
+        assertThat(smartphoneList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -307,8 +330,8 @@ public class SmartphoneResourceIntTest {
             .content(TestUtil.convertObjectToJsonBytes(smartphone)))
             .andExpect(status().isBadRequest());
 
-        List<Smartphone> smartphones = smartphoneRepository.findAll();
-        assertThat(smartphones).hasSize(databaseSizeBeforeTest);
+        List<Smartphone> smartphoneList = smartphoneRepository.findAll();
+        assertThat(smartphoneList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -325,8 +348,8 @@ public class SmartphoneResourceIntTest {
             .content(TestUtil.convertObjectToJsonBytes(smartphone)))
             .andExpect(status().isBadRequest());
 
-        List<Smartphone> smartphones = smartphoneRepository.findAll();
-        assertThat(smartphones).hasSize(databaseSizeBeforeTest);
+        List<Smartphone> smartphoneList = smartphoneRepository.findAll();
+        assertThat(smartphoneList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -343,8 +366,8 @@ public class SmartphoneResourceIntTest {
             .content(TestUtil.convertObjectToJsonBytes(smartphone)))
             .andExpect(status().isBadRequest());
 
-        List<Smartphone> smartphones = smartphoneRepository.findAll();
-        assertThat(smartphones).hasSize(databaseSizeBeforeTest);
+        List<Smartphone> smartphoneList = smartphoneRepository.findAll();
+        assertThat(smartphoneList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -361,8 +384,8 @@ public class SmartphoneResourceIntTest {
             .content(TestUtil.convertObjectToJsonBytes(smartphone)))
             .andExpect(status().isBadRequest());
 
-        List<Smartphone> smartphones = smartphoneRepository.findAll();
-        assertThat(smartphones).hasSize(databaseSizeBeforeTest);
+        List<Smartphone> smartphoneList = smartphoneRepository.findAll();
+        assertThat(smartphoneList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -379,8 +402,8 @@ public class SmartphoneResourceIntTest {
             .content(TestUtil.convertObjectToJsonBytes(smartphone)))
             .andExpect(status().isBadRequest());
 
-        List<Smartphone> smartphones = smartphoneRepository.findAll();
-        assertThat(smartphones).hasSize(databaseSizeBeforeTest);
+        List<Smartphone> smartphoneList = smartphoneRepository.findAll();
+        assertThat(smartphoneList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -397,8 +420,8 @@ public class SmartphoneResourceIntTest {
             .content(TestUtil.convertObjectToJsonBytes(smartphone)))
             .andExpect(status().isBadRequest());
 
-        List<Smartphone> smartphones = smartphoneRepository.findAll();
-        assertThat(smartphones).hasSize(databaseSizeBeforeTest);
+        List<Smartphone> smartphoneList = smartphoneRepository.findAll();
+        assertThat(smartphoneList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -415,8 +438,8 @@ public class SmartphoneResourceIntTest {
             .content(TestUtil.convertObjectToJsonBytes(smartphone)))
             .andExpect(status().isBadRequest());
 
-        List<Smartphone> smartphones = smartphoneRepository.findAll();
-        assertThat(smartphones).hasSize(databaseSizeBeforeTest);
+        List<Smartphone> smartphoneList = smartphoneRepository.findAll();
+        assertThat(smartphoneList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -433,8 +456,8 @@ public class SmartphoneResourceIntTest {
             .content(TestUtil.convertObjectToJsonBytes(smartphone)))
             .andExpect(status().isBadRequest());
 
-        List<Smartphone> smartphones = smartphoneRepository.findAll();
-        assertThat(smartphones).hasSize(databaseSizeBeforeTest);
+        List<Smartphone> smartphoneList = smartphoneRepository.findAll();
+        assertThat(smartphoneList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -451,8 +474,8 @@ public class SmartphoneResourceIntTest {
             .content(TestUtil.convertObjectToJsonBytes(smartphone)))
             .andExpect(status().isBadRequest());
 
-        List<Smartphone> smartphones = smartphoneRepository.findAll();
-        assertThat(smartphones).hasSize(databaseSizeBeforeTest);
+        List<Smartphone> smartphoneList = smartphoneRepository.findAll();
+        assertThat(smartphoneList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -469,8 +492,8 @@ public class SmartphoneResourceIntTest {
             .content(TestUtil.convertObjectToJsonBytes(smartphone)))
             .andExpect(status().isBadRequest());
 
-        List<Smartphone> smartphones = smartphoneRepository.findAll();
-        assertThat(smartphones).hasSize(databaseSizeBeforeTest);
+        List<Smartphone> smartphoneList = smartphoneRepository.findAll();
+        assertThat(smartphoneList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -479,7 +502,7 @@ public class SmartphoneResourceIntTest {
         // Initialize the database
         smartphoneRepository.saveAndFlush(smartphone);
 
-        // Get all the smartphones
+        // Get all the smartphoneList
         restSmartphoneMockMvc.perform(get("/api/smartphones?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
@@ -499,7 +522,7 @@ public class SmartphoneResourceIntTest {
             .andExpect(jsonPath("$.[*].proteccionLiquido").value(hasItem(DEFAULT_PROTECCION_LIQUIDO)))
             .andExpect(jsonPath("$.[*].puntuacion").value(hasItem(DEFAULT_PUNTUACION)))
             .andExpect(jsonPath("$.[*].descripcion").value(hasItem(DEFAULT_DESCRIPCION.toString())))
-            .andExpect(jsonPath("$.[*].fecha_lanzamiento").value(hasItem(DEFAULT_FECHA_LANZAMIENTO.toString())));
+            .andExpect(jsonPath("$.[*].fecha_lanzamiento").value(hasItem(sameInstant(DEFAULT_FECHA_LANZAMIENTO))));
     }
 
     @Test
@@ -528,7 +551,7 @@ public class SmartphoneResourceIntTest {
             .andExpect(jsonPath("$.proteccionLiquido").value(DEFAULT_PROTECCION_LIQUIDO))
             .andExpect(jsonPath("$.puntuacion").value(DEFAULT_PUNTUACION))
             .andExpect(jsonPath("$.descripcion").value(DEFAULT_DESCRIPCION.toString()))
-            .andExpect(jsonPath("$.fecha_lanzamiento").value(DEFAULT_FECHA_LANZAMIENTO.toString()));
+            .andExpect(jsonPath("$.fecha_lanzamiento").value(sameInstant(DEFAULT_FECHA_LANZAMIENTO)));
     }
 
     @Test
@@ -573,9 +596,9 @@ public class SmartphoneResourceIntTest {
             .andExpect(status().isOk());
 
         // Validate the Smartphone in the database
-        List<Smartphone> smartphones = smartphoneRepository.findAll();
-        assertThat(smartphones).hasSize(databaseSizeBeforeUpdate);
-        Smartphone testSmartphone = smartphones.get(smartphones.size() - 1);
+        List<Smartphone> smartphoneList = smartphoneRepository.findAll();
+        assertThat(smartphoneList).hasSize(databaseSizeBeforeUpdate);
+        Smartphone testSmartphone = smartphoneList.get(smartphoneList.size() - 1);
         assertThat(testSmartphone.getMarca()).isEqualTo(UPDATED_MARCA);
         assertThat(testSmartphone.getModelo()).isEqualTo(UPDATED_MODELO);
         assertThat(testSmartphone.getCamara()).isEqualTo(UPDATED_CAMARA);
@@ -596,6 +619,24 @@ public class SmartphoneResourceIntTest {
 
     @Test
     @Transactional
+    public void updateNonExistingSmartphone() throws Exception {
+        int databaseSizeBeforeUpdate = smartphoneRepository.findAll().size();
+
+        // Create the Smartphone
+
+        // If the entity doesn't have an ID, it will be created instead of just being updated
+        restSmartphoneMockMvc.perform(put("/api/smartphones")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(smartphone)))
+            .andExpect(status().isCreated());
+
+        // Validate the Smartphone in the database
+        List<Smartphone> smartphoneList = smartphoneRepository.findAll();
+        assertThat(smartphoneList).hasSize(databaseSizeBeforeUpdate + 1);
+    }
+
+    @Test
+    @Transactional
     public void deleteSmartphone() throws Exception {
         // Initialize the database
         smartphoneService.save(smartphone);
@@ -608,7 +649,7 @@ public class SmartphoneResourceIntTest {
             .andExpect(status().isOk());
 
         // Validate the database is empty
-        List<Smartphone> smartphones = smartphoneRepository.findAll();
-        assertThat(smartphones).hasSize(databaseSizeBeforeDelete - 1);
+        List<Smartphone> smartphoneList = smartphoneRepository.findAll();
+        assertThat(smartphoneList).hasSize(databaseSizeBeforeDelete - 1);
     }
 }
