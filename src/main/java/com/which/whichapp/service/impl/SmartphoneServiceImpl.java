@@ -1,6 +1,7 @@
 package com.which.whichapp.service.impl;
 
 import com.which.whichapp.domain.enumeration.EnumMarca;
+import com.which.whichapp.domain.enumeration.EnumOS;
 import com.which.whichapp.service.SmartphoneService;
 import com.which.whichapp.domain.Smartphone;
 import com.which.whichapp.repository.SmartphoneRepository;
@@ -73,7 +74,7 @@ public class SmartphoneServiceImpl implements SmartphoneService{
     }
 
     @Override
-    public List<Smartphone> findByModeloContaining(String modelo) {
+    public List<Smartphone> findByModeloContaining(String modelo) { // --> SmartphoneService.java
         List<Smartphone> modelos = smartphoneRepository.findByModeloContaining(modelo);
         return modelos;
     }
@@ -81,6 +82,12 @@ public class SmartphoneServiceImpl implements SmartphoneService{
     @Override
     public List<Smartphone> findByMarcaLike(EnumMarca marca) { // --> SmartphoneService.java
         List<Smartphone> modelos = smartphoneRepository.findByMarcaLike(marca);
+        return modelos;
+    }
+
+    @Override
+    public List<Smartphone> findBySoLike(EnumOS so) { // --> SmartphoneService.java
+        List<Smartphone> modelos = smartphoneRepository.findBySoLike(so);
         return modelos;
     }
 }
