@@ -189,11 +189,19 @@
             <label class="control-label" data-translate="whichApp.smartphone.proteccionPolvo" for="field_proteccionPolvo">Proteccion Polvo</label>
             <input type="number" class="form-control" name="proteccionPolvo" id="field_proteccionPolvo"
                     ng-model="vm.smartphone.proteccionPolvo"
-                    required />
+                    required min="0" max="6" />
             <div ng-show="editForm.proteccionPolvo.$invalid">
                 <p class="help-block"
                     ng-show="editForm.proteccionPolvo.$error.required" data-translate="entity.validation.required">
                     This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.proteccionPolvo.$error.min" data-translate="entity.validation.min" translate-value-min="0">
+                    This field should be more than 0.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.proteccionPolvo.$error.max" data-translate="entity.validation.max" translate-value-max="6">
+                    This field cannot be more than 6.
                 </p>
                 <p class="help-block"
                     ng-show="editForm.proteccionPolvo.$error.number" data-translate="entity.validation.number">
@@ -205,11 +213,19 @@
             <label class="control-label" data-translate="whichApp.smartphone.proteccionLiquido" for="field_proteccionLiquido">Proteccion Liquido</label>
             <input type="number" class="form-control" name="proteccionLiquido" id="field_proteccionLiquido"
                     ng-model="vm.smartphone.proteccionLiquido"
-                    required />
+                    required min="0" max="9" />
             <div ng-show="editForm.proteccionLiquido.$invalid">
                 <p class="help-block"
                     ng-show="editForm.proteccionLiquido.$error.required" data-translate="entity.validation.required">
                     This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.proteccionLiquido.$error.min" data-translate="entity.validation.min" translate-value-min="0">
+                    This field should be more than 0.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.proteccionLiquido.$error.max" data-translate="entity.validation.max" translate-value-max="9">
+                    This field cannot be more than 9.
                 </p>
                 <p class="help-block"
                     ng-show="editForm.proteccionLiquido.$error.number" data-translate="entity.validation.number">

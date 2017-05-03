@@ -71,10 +71,14 @@ public class Smartphone implements Serializable {
     private Integer rom;
 
     @NotNull
+    @Min(value = 0)
+    @Max(value = 6)
     @Column(name = "proteccion_polvo", nullable = false)
     private Integer proteccionPolvo;
 
     @NotNull
+    @Min(value = 0)
+    @Max(value = 9)
     @Column(name = "proteccion_liquido", nullable = false)
     private Integer proteccionLiquido;
 

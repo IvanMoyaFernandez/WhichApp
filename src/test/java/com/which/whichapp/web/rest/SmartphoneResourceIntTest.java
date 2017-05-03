@@ -78,11 +78,11 @@ public class SmartphoneResourceIntTest {
     private static final Integer DEFAULT_ROM = 1;
     private static final Integer UPDATED_ROM = 2;
 
-    private static final Integer DEFAULT_PROTECCION_POLVO = 1;
-    private static final Integer UPDATED_PROTECCION_POLVO = 2;
+    private static final Integer DEFAULT_PROTECCION_POLVO = 0;
+    private static final Integer UPDATED_PROTECCION_POLVO = 1;
 
-    private static final Integer DEFAULT_PROTECCION_LIQUIDO = 1;
-    private static final Integer UPDATED_PROTECCION_LIQUIDO = 2;
+    private static final Integer DEFAULT_PROTECCION_LIQUIDO = 0;
+    private static final Integer UPDATED_PROTECCION_LIQUIDO = 1;
 
     private static final Integer DEFAULT_PUNTUACION = 0;
     private static final Integer UPDATED_PUNTUACION = 1;
