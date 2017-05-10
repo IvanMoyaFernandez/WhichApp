@@ -172,12 +172,24 @@ public class SmartphoneResource {
         Map<String, Object> parametros = new HashMap<>();
 
         if (so != null && !so.isEmpty() && ! so.equals("empty")){
-            String[] soSplit = so.split("-");
-            parametros.put("sos", soSplit);
+            EnumOS[] soSplitEnum = Stream.of(so.split("-")).map(os -> EnumOS.valueOf(os)).toArray(EnumOS[]::new);
+            parametros.put("sos", soSplitEnum);
         }
         if (marca != null && !marca.isEmpty() && !marca.equals("empty")){
-            String[] marcaSplit = marca.split("-");
-            parametros.put("marcas", marcaSplit);
+
+
+
+            EnumMarca[] marcaSplitEnum = Stream.of(marca.split("-")).map(brand ->{
+
+                try {
+                    return EnumMarca.valueOf(brand);
+                } catch (IllegalArgumentException e){
+                    log.error("Marca no existe : {}", brand);
+                    throw e;
+                }
+
+            }).toArray(EnumMarca[]::new);
+            parametros.put("marcas", marcaSplitEnum);
         }
         if (camara != null && !camara.isEmpty() && !camara.equals("empty")){
             String[] camaraSplit = camara.split("-");

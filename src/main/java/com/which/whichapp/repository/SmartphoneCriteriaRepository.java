@@ -28,20 +28,20 @@ public class SmartphoneCriteriaRepository{
         Criteria smartphoneDefinitionCriteria = currentSession().createCriteria(Smartphone.class);
         smartphoneDefinitionCriteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 
-
-
-        filtroBySo(parametros, smartphoneDefinitionCriteria);
-        filtroByMarca(parametros, smartphoneDefinitionCriteria);
+        //filtroBySo(parametros, smartphoneDefinitionCriteria, "so");
+        filtroByMarca(parametros, smartphoneDefinitionCriteria,"marcas");
         filtroByCamara(parametros, smartphoneDefinitionCriteria);
         filtroByFrontCamara(parametros, smartphoneDefinitionCriteria);
         filtroByRom(parametros, smartphoneDefinitionCriteria);
+
 
         List<Smartphone>  resultados = smartphoneDefinitionCriteria.list();
 
         return resultados;
     }
 
-    private void filtroBySo(Map<String, Object> parametros, Criteria smartphoneDefinitionCriteria) {
+/*
+   private void filtroBySo(Map<String, Object> parametros, Criteria smartphoneDefinitionCriteria) {
         if (parametros.containsKey("sos")) {
             String[] sos = (String[]) parametros.get("sos");
             smartphoneDefinitionCriteria.add(Restrictions.in("so", sos));
@@ -53,6 +53,8 @@ public class SmartphoneCriteriaRepository{
             smartphoneDefinitionCriteria.add(Restrictions.in("marca", marcas));
         }
     }
+*/
+
     private void filtroByCamara(Map<String, Object> parametros, Criteria smartphoneDefinitionCriteria) {
         if (parametros.containsKey("camaras")) {
             Integer[] camaras = (Integer[]) parametros.get("camaras");
@@ -71,4 +73,22 @@ public class SmartphoneCriteriaRepository{
             smartphoneDefinitionCriteria.add(Restrictions.in("rom", roms));
         }
     }
+/*
+    private void filtroBySo (Map<String,Object> parameters, Criteria propertyCriteria, String key){
+        EnumOS enumOS = (EnumOS) parameters.get(key);
+        EnumOS searchType = null;
+        for (EnumOS current: enumOS.values()){
+            if(current.toString().equalsIgnoreCase(enumOS.toString())){
+                propertyCriteria.add(Restrictions.eq(key,enumOS));
+            }
+        }
+    }
+*/
+    private void filtroByMarca (Map<String,Object> parameters, Criteria propertyCriteria, String key){
+        if (parameters.containsKey(key)) {
+            EnumMarca[] enumMarcas = (EnumMarca[]) parameters.get(key);
+            propertyCriteria.add(Restrictions.in("marca", enumMarcas));
+        }
+    }
 }
+
