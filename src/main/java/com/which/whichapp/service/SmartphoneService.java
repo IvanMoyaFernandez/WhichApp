@@ -5,6 +5,7 @@ import com.which.whichapp.domain.enumeration.EnumMarca;
 import com.which.whichapp.domain.enumeration.EnumOS;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Service Interface for managing Smartphone.

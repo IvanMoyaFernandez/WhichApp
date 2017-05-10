@@ -4,22 +4,29 @@ import com.codahale.metrics.annotation.Timed;
 import com.which.whichapp.domain.Smartphone;
 import com.which.whichapp.domain.enumeration.EnumMarca;
 import com.which.whichapp.domain.enumeration.EnumOS;
+import com.which.whichapp.repository.SmartphoneCriteriaRepository;
 import com.which.whichapp.service.SmartphoneService;
 import com.which.whichapp.web.rest.util.HeaderUtil;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
+import org.springframework.core.convert.Property;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * REST controller for managing Smartphone.
@@ -32,6 +39,8 @@ public class SmartphoneResource {
 
     @Inject
     private SmartphoneService smartphoneService;
+    @Inject
+    private SmartphoneCriteriaRepository smartphoneCriteriaRepository;
 
     /**
      * POST  /smartphones : Create a new smartphone.
@@ -99,8 +108,8 @@ public class SmartphoneResource {
         log.debug("REST request to get Smartphone : {}", id);
         Smartphone smartphone = smartphoneService.findOne(id);
         return Optional.ofNullable(smartphone)
-            .map(result -> new ResponseEntity<>(
-                result,
+            .map(resultado -> new ResponseEntity<>(
+                resultado,
                 HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
@@ -146,5 +155,58 @@ public class SmartphoneResource {
         List<Smartphone> modelos = smartphoneService.findBySoLike(so);
         return modelos;
     }
+
+    // Devolver Smartphones que coincidan con los criterios de busqueda --> SmartphoneCriteriaRepository.java
+    @RequestMapping(value = "/smartphones/byFiltros/",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Transactional
+    public ResponseEntity<List<Smartphone>> getSmartphonesByFiltros(
+        @RequestParam(value = "so", required = false) String so,
+        @RequestParam(value = "marca", required = false) String marca,
+        @RequestParam(value = "camara", required = false) String camara,
+        @RequestParam(value = "front_camara", required = false) String front_camara,
+        @RequestParam(value = "rom", required = false) String rom
+    ){
+        Map<String, Object> parametros = new HashMap<>();
+
+        if (so != null && !so.isEmpty() && ! so.equals("empty")){
+            String[] soSplit = so.split("-");
+            parametros.put("sos", soSplit);
+        }
+        if (marca != null && !marca.isEmpty() && !marca.equals("empty")){
+            String[] marcaSplit = marca.split("-");
+            parametros.put("marcas", marcaSplit);
+        }
+        if (camara != null && !camara.isEmpty() && !camara.equals("empty")){
+            String[] camaraSplit = camara.split("-");
+            Integer[] camaraSplitInteger = Stream.of(camaraSplit).map(s -> Integer.parseInt(s)).toArray(Integer[]::new);
+            parametros.put("camaras", camaraSplitInteger);
+        }
+        if (front_camara != null && !front_camara.isEmpty() && !front_camara.equals("empty")){
+            String[] front_camaraSplit = front_camara.split("-");
+            Integer[] front_camaraSplitInteger = Stream.of(front_camaraSplit).map(s -> Integer.parseInt(s)).toArray(Integer[]::new);
+            parametros.put("front_camaras", front_camaraSplitInteger);
+        }
+        if (rom != null && !rom.isEmpty() && !rom.equals("empty")){
+            String[] romSplit = rom.split("-");
+            Integer[] romSplitInteger = Stream.of(romSplit).map(s -> Integer.parseInt(s)).toArray(Integer[]::new);
+            parametros.put("roms", romSplitInteger);
+        }
+
+        List<Smartphone> resultadoFiltroBusqueda = smartphoneCriteriaRepository.buscarSmartphonesByFiltros(parametros);
+
+        return Optional.ofNullable(resultadoFiltroBusqueda)
+            .map(resultado -> new ResponseEntity<>(
+                resultado,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+
+
+
+
 
 }
