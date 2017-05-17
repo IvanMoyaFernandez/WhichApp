@@ -171,23 +171,30 @@ public class SmartphoneResource {
     ){
         Map<String, Object> parametros = new HashMap<>();
 
-        if (so != null && !so.isEmpty() && ! so.equals("empty")){
-            EnumOS[] soSplitEnum = Stream.of(so.split("-")).map(os -> EnumOS.valueOf(os)).toArray(EnumOS[]::new);
-            parametros.put("sos", soSplitEnum);
+        // primero comprobamos que el parametro no venga vacio ni en null, si viene con algun parametro entramos en el if
+        if (so != null && !so.isEmpty() && !so.equals("empty")){
+            // guardamos en la variable soSplitEnum el resultados que hemos recibido que vienen separados por un guion,
+            // pero los guardamos sin los guiones.
+            EnumOS[] soSplitEnum = Stream.of(so.split("-")).map(brand ->{
+                try {
+                    return EnumOS.valueOf(brand);
+                } catch (IllegalArgumentException e){
+                    log.error("SO no existe : {}", brand);
+                    throw e;
+                }
+                // convertimos a array de EnumOS el resultado que ha quedado de separar los parametros que venian separados por guiones.
+            }).toArray(EnumOS[]::new);
+            parametros.put("so", soSplitEnum);
         }
+
         if (marca != null && !marca.isEmpty() && !marca.equals("empty")){
-
-
-
             EnumMarca[] marcaSplitEnum = Stream.of(marca.split("-")).map(brand ->{
-
                 try {
                     return EnumMarca.valueOf(brand);
                 } catch (IllegalArgumentException e){
                     log.error("Marca no existe : {}", brand);
                     throw e;
                 }
-
             }).toArray(EnumMarca[]::new);
             parametros.put("marcas", marcaSplitEnum);
         }
@@ -215,10 +222,4 @@ public class SmartphoneResource {
                 HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
-
-
-
-
-
-
 }
