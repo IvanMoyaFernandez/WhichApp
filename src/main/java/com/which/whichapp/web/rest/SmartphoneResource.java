@@ -167,7 +167,9 @@ public class SmartphoneResource {
         @RequestParam(value = "marca", required = false) String marca,
         @RequestParam(value = "camara", required = false) String camara,
         @RequestParam(value = "front_camara", required = false) String front_camara,
-        @RequestParam(value = "rom", required = false) String rom
+        @RequestParam(value = "rom", required = false) String rom,
+        @RequestParam(value = "minPuntuacion", required = false) String minPuntuacion,
+        @RequestParam(value = "maxPuntuacion", required = false) String maxPuntuacion
     ){
         Map<String, Object> parametros = new HashMap<>();
 
@@ -175,28 +177,23 @@ public class SmartphoneResource {
         if (so != null && !so.isEmpty() && !so.equals("empty")){
             // guardamos en la variable soSplitEnum el resultados que hemos recibido que vienen separados por un guion,
             // pero los guardamos sin los guiones.
-            EnumOS[] soSplitEnum = Stream.of(so.split("-")).map(brand ->{
-                try {
-                    return EnumOS.valueOf(brand);
-                } catch (IllegalArgumentException e){
-                    log.error("SO no existe : {}", brand);
-                    throw e;
-                }
-                // convertimos a array de EnumOS el resultado que ha quedado de separar los parametros que venian separados por guiones.
-            }).toArray(EnumOS[]::new);
-            parametros.put("so", soSplitEnum);
+            try {
+                // convertimos el array de strings a array de enums
+                EnumOS[] soSplitEnum = Stream.of(so.split("-")).map(system -> EnumOS.valueOf(system)).toArray(EnumOS[]::new);
+                parametros.put("so", soSplitEnum);
+            } catch (IllegalArgumentException e){
+                log.error("SO no existe : {}");
+                return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("Smartphone", "systemNotExist", e.getMessage())).body(null);
+            }
         }
-
         if (marca != null && !marca.isEmpty() && !marca.equals("empty")){
-            EnumMarca[] marcaSplitEnum = Stream.of(marca.split("-")).map(brand ->{
-                try {
-                    return EnumMarca.valueOf(brand);
-                } catch (IllegalArgumentException e){
-                    log.error("Marca no existe : {}", brand);
-                    throw e;
-                }
-            }).toArray(EnumMarca[]::new);
-            parametros.put("marcas", marcaSplitEnum);
+            try {
+                EnumMarca[] marcaSplitEnum = Stream.of(so.split("-")).map(brand -> EnumOS.valueOf(brand)).toArray(EnumMarca[]::new);
+                parametros.put("marca", marcaSplitEnum);
+            } catch (IllegalArgumentException e){
+                log.error("Marca no existe : {}");
+                return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("Smartphone", "marcaNotExist", e.getMessage())).body(null);
+            }
         }
         if (camara != null && !camara.isEmpty() && !camara.equals("empty")){
             String[] camaraSplit = camara.split("-");
@@ -212,6 +209,14 @@ public class SmartphoneResource {
             String[] romSplit = rom.split("-");
             Integer[] romSplitInteger = Stream.of(romSplit).map(s -> Integer.parseInt(s)).toArray(Integer[]::new);
             parametros.put("roms", romSplitInteger);
+        }
+        if (minPuntuacion != null && !minPuntuacion.isEmpty() && ! minPuntuacion.equals("empty")) {
+            Integer minPuntuacionInteger = Integer.parseInt(minPuntuacion);
+            parametros.put("minPuntuacion", minPuntuacionInteger);
+        }
+        if (maxPuntuacion != null && !maxPuntuacion.isEmpty() && ! maxPuntuacion.equals("empty")) {
+            Integer maxPuntuacionInteger = Integer.parseInt(maxPuntuacion);
+            parametros.put("maxPuntuacion", maxPuntuacionInteger);
         }
 
         List<Smartphone> resultadoFiltroBusqueda = smartphoneCriteriaRepository.buscarSmartphonesByFiltros(parametros);

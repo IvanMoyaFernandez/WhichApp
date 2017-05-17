@@ -33,12 +33,12 @@ public class SmartphoneCriteriaRepository{
         filtroByCamara(parametros, smartphoneDefinitionCriteria);
         filtroByFrontCamara(parametros, smartphoneDefinitionCriteria);
         filtroByRom(parametros, smartphoneDefinitionCriteria);
+        filterByPuntuacionBetween(parametros, smartphoneDefinitionCriteria);
 
         List<Smartphone>  resultados = smartphoneDefinitionCriteria.list();
 
         return resultados;
     }
-
 
     private void filtroByCamara(Map<String, Object> parametros, Criteria smartphoneDefinitionCriteria) {
         if (parametros.containsKey("camaras")) {
@@ -64,10 +64,17 @@ public class SmartphoneCriteriaRepository{
             propertyCriteria.add(Restrictions.in("so", enumOSes));
         }
     }
-    private void filtroByMarca (Map<String,Object> parameters, Criteria propertyCriteria, String key){
-        if (parameters.containsKey(key)) {
-            EnumMarca[] enumMarcas = (EnumMarca[]) parameters.get(key);
+    private void filtroByMarca (Map<String,Object> parametros, Criteria propertyCriteria, String key){
+        if (parametros.containsKey(key)) {
+            EnumMarca[] enumMarcas = (EnumMarca[]) parametros.get(key);
             propertyCriteria.add(Restrictions.in("marca", enumMarcas));
+        }
+    }
+    private void filterByPuntuacionBetween(Map<String,Object> parametros, Criteria propertyCriteria) {
+        if (parametros.containsKey("minPuntuacion") && parametros.containsKey("maxPuntuacion")) {
+            Integer minPuntuacion = (Integer) parametros.get("minPuntuacion");
+            Integer maxPuntuacion = (Integer) parametros.get("maxPuntuacion");
+            propertyCriteria.add(Restrictions.between("puntuacion", minPuntuacion, maxPuntuacion));
         }
     }
 }
