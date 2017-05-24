@@ -157,7 +157,7 @@ public class SmartphoneResource {
     }
 
     // Devolver Smartphones que coincidan con los criterios de busqueda --> SmartphoneCriteriaRepository.java
-    @RequestMapping(value = "/smartphones/byFiltros/",
+    @RequestMapping(value = "/smartphones/byFiltros",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -188,7 +188,7 @@ public class SmartphoneResource {
         }
         if (marca != null && !marca.isEmpty() && !marca.equals("empty")){
             try {
-                EnumMarca[] marcaSplitEnum = Stream.of(marca.split("-")).map(brand -> EnumMarca.valueOf(brand)).toArray(EnumMarca[]::new);
+                EnumMarca[] marcaSplitEnum = Stream.of(so.split("-")).map(brand -> EnumOS.valueOf(brand)).toArray(EnumMarca[]::new);
                 parametros.put("marca", marcaSplitEnum);
             } catch (IllegalArgumentException e){
                 log.error("Marca no existe : {}");
