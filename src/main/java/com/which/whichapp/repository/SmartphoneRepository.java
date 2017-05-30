@@ -16,4 +16,9 @@ public interface SmartphoneRepository extends JpaRepository<Smartphone,Long> {
 
     // Buscar Smartphone por sistema operativo
     List<Smartphone> findBySoLike(EnumOS os);
+
+    // Devolver el top 5 smart (puntuación)
+    @Query(value = "SELECT smartphone " +
+        "FROM Smartphone smartphone ORDER BY smartphone.puntuacion DESC")
+    List<Smartphone> getSmartphonesOrderByPuntuacion();
 }

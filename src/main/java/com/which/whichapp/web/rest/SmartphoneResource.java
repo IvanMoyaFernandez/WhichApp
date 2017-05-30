@@ -1,16 +1,18 @@
 package com.which.whichapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ListMultimap;
 import com.which.whichapp.domain.Smartphone;
 import com.which.whichapp.domain.enumeration.EnumMarca;
 import com.which.whichapp.domain.enumeration.EnumOS;
 import com.which.whichapp.repository.SmartphoneCriteriaRepository;
+import com.which.whichapp.repository.SmartphoneRepository;
 import com.which.whichapp.service.SmartphoneService;
 import com.which.whichapp.web.rest.util.HeaderUtil;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.convert.Property;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,11 +23,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.*;
 import java.util.stream.Stream;
 
 /**
@@ -41,6 +39,8 @@ public class SmartphoneResource {
     private SmartphoneService smartphoneService;
     @Inject
     private SmartphoneCriteriaRepository smartphoneCriteriaRepository;
+    @Inject
+    private SmartphoneRepository smartphoneRepository;
 
     /**
      * POST  /smartphones : Create a new smartphone.
@@ -154,6 +154,27 @@ public class SmartphoneResource {
         log.debug("REST request to get Smartphone : {}", so);
         List<Smartphone> modelos = smartphoneService.findBySoLike(so);
         return modelos;
+    }
+
+    // 3. Devolver todos los smartphones ordenados por puntuacion mediante un Map<Integer, List<Smartphon>>;
+    @GetMapping("/orderByPuntuacion")
+    public Map<Integer, Collection<Smartphone>> getSmartphonesOrderByPuntuacion() {
+        //  Creamos el multimap - MultiMapSmartphones - que contendrá una key que en nuestro caso
+        // será la puntuación del smartphon y también contendrá unos valores que en nuestro caso
+        // serán todos los datos del smartphones.
+        ListMultimap<Integer, Smartphone> MultiMapSmartphones = ArrayListMultimap.create();
+        //  auxiliar es un array de smartphones, guarda el resultado de la query
+        //  getAtletasGroupByNacionalidad que está en de SmartphoneRepository
+        List<Smartphone> auxiliar = smartphoneRepository.getSmartphonesOrderByPuntuacion();
+        // Por cada vuelta del for recorre el array del smartphon de esa posición
+        // que hay dentro del array -auxiliar-
+        for (Smartphone smartphone : auxiliar ) {
+            //  Al multimap - MultiMapSmartphones - le añadimos como key la puntuación del smartphon
+            //  y como valores todos los valores restantes del smartphon.
+            MultiMapSmartphones.put(smartphone.getPuntuacion(), smartphone);
+        }
+        //  Devolvemos un multimap convertido en map con todos los smartphones ordenados por su key (la puntuación)
+        return MultiMapSmartphones.asMap();
     }
 
     // Devolver Smartphones que coincidan con los criterios de busqueda --> SmartphoneCriteriaRepository.java
