@@ -29,7 +29,7 @@ public class SmartphoneCriteriaRepository{
         smartphoneDefinitionCriteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 
         filtroBySo(parametros, smartphoneDefinitionCriteria, "so");
-        filtroByMarca(parametros, smartphoneDefinitionCriteria,"marcas");
+        filtroByMarca(parametros, smartphoneDefinitionCriteria,"marca");
         filtroByCamara(parametros, smartphoneDefinitionCriteria);
         filtroByFrontCamara(parametros, smartphoneDefinitionCriteria);
         filtroByRom(parametros, smartphoneDefinitionCriteria);
