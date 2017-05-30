@@ -16,7 +16,7 @@ import com.which.whichapp.domain.enumeration.EnumOS;
  */
 @Entity
 @Table(name = "smartphone")
-public class Smartphone implements Serializable {
+public class Smartphone implements Serializable, Comparable <Smartphone> {
 
     private static final long serialVersionUID = 1L;
 
@@ -353,5 +353,10 @@ public class Smartphone implements Serializable {
             ", descripcion='" + descripcion + "'" +
             ", fecha_lanzamiento='" + fecha_lanzamiento + "'" +
             '}';
+    }
+
+    @Override
+    public int compareTo(Smartphone o) {
+        return id.compareTo(o.getId());
     }
 }
