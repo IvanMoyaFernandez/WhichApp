@@ -4,10 +4,8 @@ import com.which.whichapp.domain.Smartphone;
 
 import java.util.Collection;
 
-/**
- * Created by ivanmoya on 30/05/2017.
- */
 public class PuntuacionSmartphone {
+
     private Integer puntuacion;
     private Collection<Smartphone> smartphones;
 
