@@ -6,6 +6,7 @@ import com.which.whichapp.domain.enumeration.EnumOS;
 import org.springframework.data.jpa.repository.*;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 public interface SmartphoneRepository extends JpaRepository<Smartphone,Long> {
     // Buscar Smartphone por modelo
@@ -18,7 +19,7 @@ public interface SmartphoneRepository extends JpaRepository<Smartphone,Long> {
     List<Smartphone> findBySoLike(EnumOS os);
 
     // Devolver el top 5 smart (puntuación)
-    @Query(value = "SELECT smartphone " +
+    /*@Query(value = "SELECT smartphone " +
         "FROM Smartphone smartphone ORDER BY smartphone.puntuacion DESC")
-    List<Smartphone> getSmartphonesOrderByPuntuacion();
+    List<Smartphone> getSmartphonesOrderByPuntuacion(); */
 }

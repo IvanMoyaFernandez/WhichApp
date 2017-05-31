@@ -90,10 +90,4 @@ public class SmartphoneServiceImpl implements SmartphoneService{
         List<Smartphone> modelos = smartphoneRepository.findBySoLike(so);
         return modelos;
     }
-
-    @Override
-    public List<Smartphone> getSmartphonesOrderByPuntuacion() { // --> SmartphoneService.java
-        List<Smartphone> modelos = smartphoneRepository.getSmartphonesOrderByPuntuacion();
-        return modelos;
-    }
 }

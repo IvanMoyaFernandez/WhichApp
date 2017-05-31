@@ -45,5 +45,5 @@ public interface SmartphoneService {
     List<Smartphone> findByModeloContaining(String modelo); // --> SmartphoneRepository.java
     List<Smartphone> findByMarcaLike(EnumMarca marca); // --> SmartphoneRepository.java
     List<Smartphone> findBySoLike(EnumOS os); // --> SmartphoneRepository.java
-    List<Smartphone> getSmartphonesOrderByPuntuacion(); // --> SmartphoneRepository.java
+
 }
