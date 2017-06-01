@@ -162,22 +162,40 @@ public class SmartphoneResource {
 
     // Devolver todos los smartphones ordenados por puntuacion mediante un TreeMultimap<Integer, Smartphone>;
     @GetMapping("/orderByPuntuacion")
+    @Timed
     public List<PuntuacionSmartphone> getSmartphonesOrderByPuntuacion() {
-        // agrupa la lista recibida en un map de forma paralela
+        // agrupa la lista recibida en un map de forma paralela (los smartphones están están agrupados por puntuación
+        // y las puntuaciónes desordenadas)
         Map<Integer, List<Smartphone>> mapSmartphones = smartphoneRepository.findAll()
             .parallelStream()
             .collect(Collectors.groupingBy(Smartphone::getPuntuacion));
         // creamos el ArrayList que posteriormente contendrá la lista de smartphones ordenados desc
         List<PuntuacionSmartphone> result = new ArrayList<>();
-        // recorremos los resultados del NavigableMap - mapSmartphones - y vamos añadiendo CADA RESULTADO*** dentro del ArrayList - result -
+        // recorremos los resultados del Map - mapSmartphones - y vamos añadiendo CADA RESULTADO*** dentro del ArrayList - result -
         // ***(CADA RESULTADO es un array de smartphones agrupados por la puntuación, esto es un objeto de la clase PuntuacionSmartphone)
         for (Integer puntuacion :
-            mapSmartphones.keySet().stream().sorted(Comparator.comparing(Integer::intValue).reversed()).collect(Collectors.toList())
+            mapSmartphones.keySet().stream().limit(5).sorted(Comparator.comparing(Integer::intValue).reversed()).collect(Collectors.toList())
              ) {
             PuntuacionSmartphone puntuacionSmartphone = new PuntuacionSmartphone(puntuacion, mapSmartphones.get(puntuacion));
             result.add(puntuacionSmartphone);
         }
         //  Devolvemos el ArrayList - result - con todos los smartphones ordenados por su key (la puntuación)
+        return result;
+    }
+
+    // Devolver todos los smartphones ordenados por puntuacion mediante un TreeMultimap<Integer, Smartphone>;
+    @GetMapping("/orderAllByPuntuacion")
+    @Timed
+    public List<PuntuacionSmartphone> getAllSmartphonesOrderByPuntuacion() {
+        Map<Integer, List<Smartphone>> mapSmartphones = smartphoneRepository.findAll()
+            .parallelStream()
+            .collect(Collectors.groupingBy(Smartphone::getPuntuacion));
+        List<PuntuacionSmartphone> result = new ArrayList<>();
+        for (Integer puntuacion :
+            mapSmartphones.keySet().stream().sorted(Comparator.comparing(Integer::intValue).reversed()).collect(Collectors.toList())) {
+            PuntuacionSmartphone puntuacionSmartphone = new PuntuacionSmartphone(puntuacion, mapSmartphones.get(puntuacion));
+            result.add(puntuacionSmartphone);
+        }
         return result;
     }
 
