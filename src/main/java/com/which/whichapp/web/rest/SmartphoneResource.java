@@ -58,7 +58,8 @@ public class SmartphoneResource {
     public ResponseEntity<Smartphone> createSmartphone(@Valid @RequestBody Smartphone smartphone) throws URISyntaxException {
         log.debug("REST request to save Smartphone : {}", smartphone);
         if (smartphone.getId() != null) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("smartphone", "idexists", "A new smartphone cannot already have an ID")).body(null);
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("smartphone", "idexists",
+                "A new smartphone cannot already have an ID")).body(null);
         }
         Smartphone result = smartphoneService.save(smartphone);
         return ResponseEntity.created(new URI("/api/smartphones/" + result.getId()))
@@ -164,7 +165,7 @@ public class SmartphoneResource {
     @GetMapping("/orderByPuntuacion")
     @Timed
     public List<PuntuacionSmartphone> getSmartphonesOrderByPuntuacion() {
-        // agrupa la lista recibida en un map de forma paralela (los smartphones están están agrupados por puntuación
+        // agrupa la lista recibida en un map de forma paralela (los smartphones están agrupados por puntuación
         // y las puntuaciónes desordenadas)
         Map<Integer, List<Smartphone>> mapSmartphones = smartphoneRepository.findAll()
             .parallelStream()
@@ -210,7 +211,8 @@ public class SmartphoneResource {
         @RequestParam(value = "marca", required = false) String marca,
         @RequestParam(value = "camara", required = false) String camara,
         @RequestParam(value = "front_camara", required = false) String front_camara,
-        @RequestParam(value = "rom", required = false) String rom,
+        @RequestParam(value = "minMemoria", required = false) String minMemoria,
+        @RequestParam(value = "maxMemoria", required = false) String maxMemoria,
         @RequestParam(value = "minPuntuacion", required = false) String minPuntuacion,
         @RequestParam(value = "maxPuntuacion", required = false) String maxPuntuacion
     ){
@@ -248,10 +250,13 @@ public class SmartphoneResource {
             Integer[] front_camaraSplitInteger = Stream.of(front_camaraSplit).map(s -> Integer.parseInt(s)).toArray(Integer[]::new);
             parametros.put("front_camaras", front_camaraSplitInteger);
         }
-        if (rom != null && !rom.isEmpty() && !rom.equals("empty")){
-            String[] romSplit = rom.split("-");
-            Integer[] romSplitInteger = Stream.of(romSplit).map(s -> Integer.parseInt(s)).toArray(Integer[]::new);
-            parametros.put("roms", romSplitInteger);
+        if (minMemoria != null && !minMemoria.isEmpty() && ! minMemoria.equals("empty")) {
+            Integer minMemoriaInteger = Integer.parseInt(minMemoria);
+            parametros.put("minMemoria", minMemoriaInteger);
+        }
+        if (maxMemoria != null && !maxMemoria.isEmpty() && ! maxMemoria.equals("empty")) {
+            Integer maxMemoriaInteger = Integer.parseInt(maxMemoria);
+            parametros.put("maxMemoria", maxMemoriaInteger);
         }
         if (minPuntuacion != null && !minPuntuacion.isEmpty() && ! minPuntuacion.equals("empty")) {
             Integer minPuntuacionInteger = Integer.parseInt(minPuntuacion);

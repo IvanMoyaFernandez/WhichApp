@@ -63,6 +63,7 @@ public class SmartphoneServiceImpl implements SmartphoneService{
         return smartphone;
     }
 
+
     /**
      *  Delete the  smartphone by id.
      *
@@ -86,7 +87,7 @@ public class SmartphoneServiceImpl implements SmartphoneService{
     }
 
     @Override
-    public List<Smartphone> findBySoLike(EnumOS so) { // --> SmartphoneService.java
+    public List<Smartphone> findBySoLike(EnumOS so) {
         List<Smartphone> modelos = smartphoneRepository.findBySoLike(so);
         return modelos;
     }

@@ -32,7 +32,7 @@ public class SmartphoneCriteriaRepository{
         filtroByMarca(parametros, smartphoneDefinitionCriteria,"marca");
         filtroByCamara(parametros, smartphoneDefinitionCriteria);
         filtroByFrontCamara(parametros, smartphoneDefinitionCriteria);
-        filtroByRom(parametros, smartphoneDefinitionCriteria);
+        filterByRomBetween(parametros, smartphoneDefinitionCriteria);
         filterByPuntuacionBetween(parametros, smartphoneDefinitionCriteria);
 
         List<Smartphone>  resultados = smartphoneDefinitionCriteria.list();
@@ -52,10 +52,11 @@ public class SmartphoneCriteriaRepository{
             smartphoneDefinitionCriteria.add(Restrictions.in("front_camara", front_camaras));
         }
     }
-    private void filtroByRom(Map<String, Object> parametros, Criteria smartphoneDefinitionCriteria) {
-        if (parametros.containsKey("roms")) {
-            Integer[] roms = (Integer[]) parametros.get("roms");
-            smartphoneDefinitionCriteria.add(Restrictions.in("rom", roms));
+    private void filterByRomBetween(Map<String,Object> parametros, Criteria propertyCriteria) {
+        if (parametros.containsKey("minMemoria") && parametros.containsKey("maxMemoria")) {
+            Integer minMemoria = (Integer) parametros.get("minMemoria");
+            Integer maxMemoria = (Integer) parametros.get("maxMemoria");
+            propertyCriteria.add(Restrictions.between("rom", minMemoria, maxMemoria));
         }
     }
     private void filtroBySo (Map<String,Object> parameters, Criteria propertyCriteria, String key){
